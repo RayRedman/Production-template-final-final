@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Contact Us</title>
+    <meta name="description" id="meta-description" content="">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- PROMO BANNER -->
+    <div class="promo-banner" id="promo-banner"></div>
+
+    <!-- TOP BAR -->
+    <div class="top-bar" id="top-bar"></div>
+
+    <!-- HEADER -->
+    <header class="header" id="header"></header>
+
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobile-menu"></div>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero" id="page-hero"></section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact-section"></section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="footer"></footer>
+
+    <!-- STICKY MOBILE CTA -->
+    <div class="sticky-mobile-cta" id="sticky-mobile-cta"></div>
+
+    <!-- Scripts -->
+    <script src="CONFIG.js"></script>
+    <script src="core.js"></script>
+    <script>
+    // ==========================================
+    // CONTACT PAGE-SPECIFIC RENDERS
+    // ==========================================
+    
+    function renderPageHero() {
+        const container = document.getElementById('page-hero');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="container">
+                <h1 class="page-hero-title">${CONFIG.contact.title}</h1>
+                <p class="page-hero-subtitle">${CONFIG.contact.subtitle}</p>
+            </div>
+        `;
+    }
+    
+    function renderContactSection() {
+        const container = document.getElementById('contact-section');
+        if (!container) return;
+        
+        // Build hours list
+        const hoursItems = CONFIG.contact.hours.map(h => `
+            <div class="contact-hours-item">
+                <span>${h.days}</span>
+                <span>${h.time}</span>
+            </div>
+        `).join('');
+        
+        // Build form fields
+        const formFields = CONFIG.contact.formFields.map(f => {
+            const fullWidthClass = f.halfWidth ? '' : 'full-width';
+            
+            if (f.type === 'textarea') {
+                return `
+                    <div class="form-group ${fullWidthClass}">
+                        <textarea name="${f.name}" class="form-textarea" placeholder="${f.placeholder}" rows="${f.rows || 5}" ${f.required ? 'required' : ''}></textarea>
+                    </div>
+                `;
+            }
+            
+            return `
+                <div class="form-group ${fullWidthClass}">
+                    <input type="${f.type}" name="${f.name}" class="form-input" placeholder="${f.placeholder}" ${f.required ? 'required' : ''}>
+                </div>
+            `;
+        }).join('');
+        
+        // Build map HTML
+        const mapHTML = CONFIG.contact.showMap ? `
+            <div class="contact-map">
+                <iframe src="${CONFIG.contact.mapEmbedUrl}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        ` : '';
+        
+        container.innerHTML = `
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info-card">
+                        <h2 class="contact-info-title">${CONFIG.contact.infoTitle}</h2>
+                        <p class="contact-info-subtitle">${CONFIG.contact.infoSubtitle}</p>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">${getIcon('phone')}</div>
+                            <div class="contact-info-content">
+                                <h4>Phone</h4>
+                                <a href="tel:${CONFIG.brand.phoneRaw}">${CONFIG.brand.phone}</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">${getIcon('email')}</div>
+                            <div class="contact-info-content">
+                                <h4>Email</h4>
+                                <a href="mailto:${CONFIG.brand.email}">${CONFIG.brand.email}</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">${getIcon('mapPin')}</div>
+                            <div class="contact-info-content">
+                                <h4>Address</h4>
+                                <p>${CONFIG.brand.address}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-hours">
+                            <h3 class="contact-hours-title">${CONFIG.contact.hoursTitle}</h3>
+                            ${hoursItems}
+                            <div class="contact-hours-note">${getIcon('clock')} ${CONFIG.contact.emergencyNote}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-card">
+                        <h2 class="contact-form-title">${CONFIG.contact.formTitle}</h2>
+                        <p class="contact-form-subtitle">${CONFIG.contact.formSubtitle}</p>
+                        
+                        <form id="contact-form">
+                            <div class="contact-form-grid">
+                                ${formFields}
+                            </div>
+                            <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: var(--space-md);">
+                                ${CONFIG.contact.formSubmitText}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                ${mapHTML}
+            </div>
+        `;
+        
+        // Setup form handler
+        setupFormHandler('contact-form', CONFIG.form.ghlWebhook, CONFIG.form.successMessage);
+    }
+    
+    // ==========================================
+    // INIT
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', () => {
+        initCommon('contact');
+        renderPageHero();
+        renderContactSection();
+        renderFooter();
+        renderStickyMobileCTA();
+    });
+    </script>
+
+</body>
+</html>

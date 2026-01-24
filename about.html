@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">About Us</title>
+    <meta name="description" id="meta-description" content="">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- PROMO BANNER -->
+    <div class="promo-banner" id="promo-banner"></div>
+
+    <!-- TOP BAR -->
+    <div class="top-bar" id="top-bar"></div>
+
+    <!-- HEADER -->
+    <header class="header" id="header"></header>
+
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobile-menu"></div>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero" id="page-hero"></section>
+
+    <!-- ABOUT STORY -->
+    <section class="about-story" id="about-story"></section>
+
+    <!-- VALUES -->
+    <section class="values" id="values"></section>
+
+    <!-- STATS -->
+    <section class="stats" id="stats"></section>
+
+    <!-- CTA -->
+    <section class="cta" id="cta"></section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="footer"></footer>
+
+    <!-- STICKY MOBILE CTA -->
+    <div class="sticky-mobile-cta" id="sticky-mobile-cta"></div>
+
+    <!-- Scripts -->
+    <script src="CONFIG.js"></script>
+    <script src="core.js"></script>
+    <script>
+    // ==========================================
+    // ABOUT PAGE-SPECIFIC RENDERS
+    // ==========================================
+    
+    function renderPageHero() {
+        const container = document.getElementById('page-hero');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="container">
+                <h1 class="page-hero-title">${CONFIG.about.title}</h1>
+                <p class="page-hero-subtitle">${CONFIG.about.subtitle}</p>
+            </div>
+        `;
+    }
+    
+    function renderAboutStory() {
+        const container = document.getElementById('about-story');
+        if (!container) return;
+        
+        const image = CONFIG.about.story.image || CONFIG.images.fallbacks.about;
+        const paragraphs = CONFIG.about.story.paragraphs.map(p => `<p>${p}</p>`).join('');
+        
+        container.innerHTML = `
+            <div class="container">
+                <div class="about-story-grid">
+                    <div class="about-story-image">
+                        <img src="${image}" alt="${CONFIG.about.story.title}">
+                    </div>
+                    <div class="about-story-content">
+                        <h2>${CONFIG.about.story.title}</h2>
+                        ${paragraphs}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderValues() {
+        const container = document.getElementById('values');
+        if (!container) return;
+        
+        const cards = CONFIG.about.values.items.map(v => `
+            <div class="value-card">
+                <div class="value-icon">${getIcon(v.icon)}</div>
+                <h3 class="value-title">${v.title}</h3>
+                <p class="value-desc">${v.description}</p>
+            </div>
+        `).join('');
+        
+        container.innerHTML = `
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">${CONFIG.about.values.title}</h2>
+                    <p class="section-subtitle">${CONFIG.about.values.subtitle}</p>
+                </div>
+                <div class="values-grid">${cards}</div>
+            </div>
+        `;
+    }
+    
+    // ==========================================
+    // INIT
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', () => {
+        initCommon('about');
+        renderPageHero();
+        renderAboutStory();
+        renderValues();
+        renderStats();
+        renderCTA();
+        renderFooter();
+        renderStickyMobileCTA();
+    });
+    </script>
+
+</body>
+</html>
