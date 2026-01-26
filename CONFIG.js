@@ -136,11 +136,10 @@ const CONFIG = {
                 { src: "/assets/clients/active/projects/04.jpg", alt: "Recent project 4" },
                 { src: "/assets/clients/active/projects/05.jpg", alt: "Recent project 5" },
                 { src: "/assets/clients/active/projects/06.jpg", alt: "Recent project 6" }
-            ],
-        }
-        
-        fallback: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&q=80",
-    },
+         ],
+  fallback: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&q=80"
+},
+
 
     // ==========================================
     // HERO
