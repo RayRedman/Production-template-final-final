@@ -38,7 +38,7 @@ const CONFIG = {
         shadowSoft: "0 4px 20px rgba(0, 0, 0, 0.08)",
         shadowMedium: "0 8px 30px rgba(0, 0, 0, 0.12)",
         shadowStrong: "0 15px 50px rgba(0, 0, 0, 0.15)",
-    }
+    },
 
     // ==========================================
     // NAVIGATION
