@@ -1,61 +1,80 @@
 // ==========================================
 // SITE CONFIGURATION
-// Reliable Handyman Pros (Template)
+// Splashy Bubbles Mobile Auto Detailing
 // ==========================================
 
 const CONFIG = {
-  // ================================
-  // BRAND IDENTITY
-  // ================================
-  brand: {
-    name: "Reliable Handyman Pros",
-    tagline: "Repairs, Installations & Small Remodels",
-    phone: "(512) 555-0147",
-    phoneRaw: "5125550147",
-    email: "hello@reliablehandymanpros.com",
-    address: "Austin, TX",
-    license: "Licensed • Insured",
-    logo: "logo.png",
-    logoIcon: "tools",
-    yearEstablished: 2018,
-  },
+    // ==========================================
+    // BRAND IDENTITY
+    // ==========================================
+    brand: {
+        name: "Splashy Bubbles",
+        tagline: "Mobile Auto Detailing - We Come To You",
+        phone: "(951) 708-6705",
+        phoneRaw: "9517086705",
+        email: "splashybubbles@email.com",
+        address: "782 Suncup Cir, Hemet, CA 92543",
+        hours: "Mon-Sat: 7AM - 7PM",
+        license: "Fully Insured • Professional Service",
+        logo: "logo.png",
+        logoIcon: "car",
+        yearEstablished: null,
+    },
 
-  // ================================
-  // THEME & COLORS
-  // ================================
-  theme: {
-    primaryColor: "#1a3a5c",
-    primaryDark: "#0f2a42",
-    primaryLight: "#2a5a8c",
-    accentColor: "#f4c430",
-    accentDark: "#d4a820",
-    accentLight: "#ffe066",
-    gold: "#f4c430",
-    green: "#28A745",
-    gradientPrimary: "#1a3a5c",
-    gradientAccent: "#f4c430",
-    glassBg: "rgba(255, 255, 255, 1)",
-    shadowSoft: "0 4px 20px rgba(0, 0, 0, 0.08)",
-    shadowMedium: "0 8px 30px rgba(0, 0, 0, 0.12)",
-    shadowStrong: "0 15px 50px rgba(0, 0, 0, 0.15)",
-  },
+    // ==========================================
+    // THEME & COLORS
+    // ==========================================
+    theme: {
+        primaryColor: "#1a3a5c",
+        primaryDark: "#0f2a42",
+        primaryLight: "#2a5a8c",
+        accentColor: "#f4c430",
+        accentDark: "#d4a820",
+        accentLight: "#ffe066",
+        gold: "#f4c430",
+        green: "#28A745",
+        gradientPrimary: "linear-gradient(135deg, #1a3a5c 0%, #2a5a8c 100%)",
+        gradientAccent: "linear-gradient(135deg, #f4c430 0%, #ffe066 100%)",
+        glassBg: "rgba(255, 255, 255, 0.95)",
+        shadowSoft: "0 4px 20px rgba(0, 0, 0, 0.08)",
+        shadowMedium: "0 8px 30px rgba(0, 0, 0, 0.12)",
+        shadowStrong: "0 15px 50px rgba(0, 0, 0, 0.15)",
+    },
 
-  // ================================
-  // NAVIGATION
-  // ================================
-  nav: [
-    { label: "Home", href: "index.html" },
-    { label: "About", href: "about.html" },
-    { label: "Services", href: "services.html" },
-    { label: "Service Areas", href: "service-area.html" },
-    { label: "Contact", href: "contact.html" },
-  ],
+    // ==========================================
+    // NAVIGATION
+    // ==========================================
+    nav: [
+        { label: "Home", href: "index.html" },
+        { label: "About", href: "about.html" },
+        { 
+            label: "Services", 
+            href: "services.html",
+            children: [
+                { label: "Exterior Detail", href: "services.html#exterior-detail" },
+                { label: "Interior Detail", href: "services.html#interior-detail" },
+                { label: "Full Detail", href: "services.html#full-detail" },
+                { label: "Tesla Detailing", href: "services.html#tesla-detail" },
+            ]
+        },
+        { 
+            label: "Service Areas", 
+            href: "service-area.html",
+            children: [
+                { label: "Hemet", href: "service-areas/hemet.html" },
+                { label: "San Jacinto", href: "service-areas/san-jacinto.html" },
+                { label: "Menifee", href: "service-areas/menifee.html" },
+                { label: "Temecula", href: "service-areas/temecula.html" },
+                { label: "Murrieta", href: "service-areas/murrieta.html" },
+            ]
+        },
+        { label: "Contact", href: "contact.html" },
+    ],
 
-  // ================================
-  // TOP BAR
-  // ================================
-  topBar: {
-
+    // ==========================================
+    // TOP BAR
+    // ==========================================
+    topBar: {
         emergencyText: "Mobile Service - We Come To You",
         showAddress: true,
         showHours: true,
@@ -127,35 +146,35 @@ const CONFIG = {
         
         gallery: {
             enabled: true,
-            title: "Recent Work",
-            subtitle: "Real projects completed for homeowners and businesses",
+            title: "Our Work",
+            subtitle: "See the quality and care we bring to every detail",
             items: [
-                { src: "/assets/clients/active/projects/01.jpg", alt: "Recent project 1" },
-                { src: "/assets/clients/active/projects/02.jpg", alt: "Recent project 2" },
-                { src: "/assets/clients/active/projects/03.jpg", alt: "Recent project 3" },
-                { src: "/assets/clients/active/projects/04.jpg", alt: "Recent project 4" },
-                { src: "/assets/clients/active/projects/05.jpg", alt: "Recent project 5" },
-                { src: "/assets/clients/active/projects/06.jpg", alt: "Recent project 6" }
+                { src: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&q=80", alt: "Car detailing" },
+                { src: "https://images.unsplash.com/photo-1605164599901-57e4f726c007?w=600&q=80", alt: "Interior cleaning" },
+                { src: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=80", alt: "Exterior shine" },
+                { src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80", alt: "Dashboard detail" },
+                { src: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600&q=80", alt: "Tesla detailing" },
+                { src: "https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=600&q=80", alt: "Paint protection" },
             ],
         },
+        
         fallback: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&q=80",
     },
-
 
     // ==========================================
     // HERO
     // ==========================================
     hero: {
-        label: "Handyman Services",
-        badge: "Licensed • Insured • Local",
-        headline: "Handyman Services in",
-        headlineAccent: "Austin, TX",
-        subhead: "Repairs, installs, and small remodels — done right the first time. Fast scheduling and clear pricing.",
-        backgroundImage: "/assets/clients/active/hero.jpg",
+        label: "Mobile Detailing Experts",
+        badge: "Hemet's Mobile Detailing Pros",
+        headline: "Mobile Auto Detailing in",
+        headlineAccent: "Hemet, CA",
+        subhead: "We come to you. Professional interior and exterior detailing at your home or office.",
+        backgroundImage: null,
         features: [
-            "Free Estimates",
-            "Same-Day Service",
-            "Satisfaction Guaranteed"
+            "Mobile Service",
+            "4.9 ★ Google Rating",
+            "Interior & Exterior"
         ],
         guaranteeBadge: {
             enabled: false,
@@ -163,12 +182,12 @@ const CONFIG = {
             subtext: "",
         },
         ctaPrimary: {
-            text: "Request Estimate",
+            text: "Get Free Quote",
             href: "#quote",
         },
         ctaSecondary: {
             text: "Call Now",
-            href: "tel:5125550147",
+            href: "tel:9517086705",
         },
     },
 
@@ -176,38 +195,45 @@ const CONFIG = {
     // LEAD CAPTURE FORM
     // ==========================================
     form: {
-        title: "Request an Estimate",
-        subtitle: "Tell us a bit about the work you need done.",
-        submitText: "Request Estimate",
+        title: "Get a Free Quote",
+        subtitle: "Tell us about your project and we'll provide a free, no-obligation estimate.",
+        formTitle: "Get Your Free Quote",
+        formSubtitle: "No spam, no hassle — just honest pricing",
+        responseBadge: "We Respond Within 30 Minutes",
+        phoneCtaLabel: "Prefer to talk? Call us now:",
+        submitText: "Get My Free Quote",
         privacyText: "Your information is secure and never shared.",
-        messagePlaceholder: "Describe the work you need done (rooms, materials, photos, timing)...",
+        messagePlaceholder: "Tell us about your vehicle or any special requests...",
         consentText: "I agree to receive text messages and calls about my inquiry.",
         ghlWebhook: "",
         fields: [
             { name: "name", label: "Full Name", type: "text", placeholder: "John Smith", required: true },
-            { name: "phone", label: "Phone Number", type: "tel", placeholder: "(512) 555-0147", required: true },
-            { name: "email", label: "Email", type: "email", placeholder: "you@email.com", required: false },
+            { name: "phone", label: "Phone", type: "tel", placeholder: "(951) 555-1234", required: true },
         ],
-        showServiceDropdown: true,
+        showServiceDropdown: false,
         serviceOptions: [
             { value: "", label: "Select Service Needed" },
-            { value: "drywall", label: "Drywall Repair" },
-            { value: "tv-mounting", label: "TV Mounting" },
-            { value: "doors-locks", label: "Door & Lock Repair" },
-            { value: "fixtures", label: "Fixture Installation" },
-            { value: "assembly", label: "Furniture Assembly" },
-            { value: "general-repairs", label: "General Home Repairs" },
+            { value: "exterior", label: "Exterior Detail" },
+            { value: "interior", label: "Interior Detail" },
+            { value: "full", label: "Full Detail Package" },
             { value: "other", label: "Other / Not Sure" },
         ],
+        features: [
+            "Free Estimates",
+            "Same-Day Service Available",
+            "No Obligation",
+            "Licensed & Insured"
+        ],
+        successMessage: "Thanks! We'll call you shortly to schedule your detail.",
     },
 
     // ==========================================
     // TRUST BADGES
     // ==========================================
     trustBadges: [
-        { icon: "shield", text: "Licensed & Insured" },
-        { icon: "dollar", text: "Free Estimates" },
-        { icon: "home", text: "Family Owned" },
+        { icon: "truck", text: "Mobile Service" },
+        { icon: "star", text: "4.9 Star Rated" },
+        { icon: "clock", text: "Flexible Scheduling" },
         { icon: "check", text: "Satisfaction Guaranteed" },
     ],
 
@@ -216,95 +242,67 @@ const CONFIG = {
     // ==========================================
     services: {
         title: "Our Services",
-        subtitle: "Professional repairs and installations for your home or business",
+        subtitle: "Professional detailing packages for every vehicle",
         viewAllText: "View All Services",
         viewAllLink: "services.html",
         learnMoreText: "Learn More",
         items: [
             {
-                id: "drywall",
-                title: "Drywall Repair",
-                shortDesc: "Patching holes, cracks, and damaged walls.",
-                fullDesc: "Professional drywall patching and repair for holes, cracks, water damage, and dents. We prep, patch, sand, and leave a clean finish ready for paint.",
-                icon: "hammer",
-                image: "/assets/clients/active/services/drywall.jpg",
+                id: "exterior-detail",
+                title: "Exterior Detailing",
+                shortDesc: "Hand wash, clay bar, polish, and wax to restore your vehicle's shine and protect the paint.",
+                fullDesc: "Complete exterior detailing including hand wash, clay bar treatment, paint decontamination, polish, and protective wax coating. We bring all equipment and water to your location.",
+                icon: "car",
+                image: null,
                 features: [
-                    "Hole & Crack Repair",
-                    "Water Damage Patching",
-                    "Sanding & Prep",
-                    "Clean Work Area"
+                    "Hand Wash",
+                    "Clay Bar Treatment",
+                    "Polish & Wax",
+                    "Tire Shine",
                 ],
             },
             {
-                id: "tv-mounting",
-                title: "TV Mounting",
-                shortDesc: "Secure installation on drywall, brick, or concrete.",
-                fullDesc: "Safe, level TV mounting with proper anchors and clean cable routing options. We bring the right hardware for your wall type and layout.",
-                icon: "toolbox",
-                image: "/assets/clients/active/services/tv-mount.jpg",
+                id: "interior-detail",
+                title: "Interior Detailing",
+                shortDesc: "Deep cleaning of seats, carpets, dashboard, and all interior surfaces. Fresh and spotless.",
+                fullDesc: "Thorough interior cleaning including vacuuming, steam cleaning, leather conditioning, dashboard treatment, and complete sanitization.",
+                icon: "sparkle",
+                image: null,
                 features: [
-                    "Stud Finding",
-                    "Level Install",
-                    "Hardware Included*",
-                    "Optional Cable Management"
+                    "Deep Vacuum",
+                    "Steam Cleaning",
+                    "Leather Care",
+                    "Odor Removal",
                 ],
             },
             {
-                id: "doors-locks",
-                title: "Door & Lock Repair",
-                shortDesc: "Fix sticking doors, broken hardware, and alignment issues.",
-                fullDesc: "We repair and adjust interior and exterior doors, replace or repair locks and handles, and fix alignment issues so everything closes smoothly and securely.",
-                icon: "shield",
-                image: "/assets/clients/active/services/door.jpg",
+                id: "full-detail",
+                title: "Full Detail Package",
+                shortDesc: "Complete interior and exterior detailing for a like-new finish inside and out.",
+                fullDesc: "Our most popular package combining full interior and exterior detailing services for a complete transformation.",
+                icon: "star",
+                image: null,
                 features: [
-                    "Alignment & Hinges",
-                    "Lock/Handle Replacement",
-                    "Weatherstrip Adjustments",
-                    "Secure Fit"
+                    "Everything Included",
+                    "Best Value",
+                    "3-4 Hours",
+                    "Like-New Results",
                 ],
             },
             {
-                id: "fixtures",
-                title: "Fixture Installation",
-                shortDesc: "Lights, fans, faucets, and hardware installs.",
-                fullDesc: "Professional installation of common household fixtures and hardware. We follow manufacturer specs and leave a clean finish.",
-                icon: "wrench",
-                image: "/assets/clients/active/services/fixtures.jpg",
-                features: [
-                    "Light Fixtures",
-                    "Ceiling Fans",
-                    "Faucets & Hardware",
-                    "Clean Finish"
-                ],
-            },
-            {
-                id: "assembly",
-                title: "Furniture Assembly",
-                shortDesc: "Beds, desks, shelving, and more.",
-                fullDesc: "Fast, careful furniture assembly for common brands and custom pieces. We tighten, level, and ensure everything is safe and sturdy.",
+                id: "upholstery",
+                title: "Upholstery Cleaning",
+                shortDesc: "Professional cleaning and stain removal for cloth and leather seats and surfaces.",
+                fullDesc: "Deep extraction cleaning for fabric seats, leather cleaning and conditioning, carpet shampooing, and stubborn stain removal.",
                 icon: "home",
-                image: "/assets/clients/active/services/assembly.jpg",
+                image: null,
                 features: [
-                    "Fast Assembly",
-                    "Leveling & Tightening",
-                    "Wall Anchors (as needed)",
-                    "Cleanup"
+                    "Stain Removal",
+                    "Deep Extraction",
+                    "Leather Conditioning",
+                    "Carpet Shampoo",
                 ],
             },
-            {
-                id: "general-repairs",
-                title: "General Home Repairs",
-                shortDesc: "Small fixes that keep your home running smoothly.",
-                fullDesc: "From punch-list items to small repairs around the home, we handle the details so you don’t have to.",
-                icon: "check-circle",
-                image: "/assets/clients/active/services/repairs.jpg",
-                features: [
-                    "Punch List Work",
-                    "Small Repairs",
-                    "Installations",
-                    "Reliable Scheduling"
-                ],
-            }
         ],
     },
 
@@ -383,10 +381,10 @@ const CONFIG = {
     // STATISTICS
     // ==========================================
     stats: [
-        { value: "Licensed", label: "& Insured" },
-        { value: "Free", label: "Estimates" },
-        { value: "Same-Day", label: "Service" },
-        { value: "100%", label: "Satisfaction" }
+        { value: "500+", label: "Cars Detailed" },
+        { value: "4.9", label: "Google Rating" },
+        { value: "45", label: "5-Star Reviews" },
+        { value: "100%", label: "Mobile Service" },
     ],
 
     // ==========================================
@@ -402,26 +400,26 @@ const CONFIG = {
         },
         items: [
             {
-                text: "On time, explained the work clearly, and finished faster than expected.",
-                author: "Mark R.",
-                location: "Austin, TX",
+                text: "Amazing service! They came right to my house and my truck looks brand new. Super convenient and the price was fair.",
+                author: "Marcus T.",
+                location: "Hemet, CA",
                 rating: 5,
                 avatar: null,
             },
             {
-                text: "Handled several small repairs in one visit. Clean work and fair pricing.",
-                author: "Sarah L.",
-                location: "Round Rock, TX",
+                text: "Had my Tesla detailed and they did an incredible job. They knew exactly how to handle the white interior. Highly recommend!",
+                author: "Jennifer L.",
+                location: "San Jacinto, CA",
                 rating: 5,
                 avatar: null,
             },
             {
-                text: "Booked easily and showed up when they said they would. Would use again.",
-                author: "Daniel P.",
-                location: "Cedar Park, TX",
+                text: "Best mobile detailing in Hemet! The full detail package was worth every penny. My car hasn't looked this good since I bought it.",
+                author: "Robert K.",
+                location: "Menifee, CA",
                 rating: 5,
                 avatar: null,
-            }
+            },
         ],
     },
 
@@ -603,125 +601,101 @@ const CONFIG = {
     // ==========================================
     serviceAreas: [
         {
-            id: "austin",
-            name: "Austin",
-            slug: "austin",
-            headline: "Handyman Services in Austin, TX",
-            description: "Reliable handyman services for repairs, installations, and small remodels in Austin. Fast scheduling, clear communication, and clean work.",
+            id: "hemet",
+            name: "Hemet",
+            slug: "hemet",
+            headline: "Mobile Auto Detailing in Hemet, CA",
+            description: "Hemet's trusted mobile auto detailing service. We come to your home or office with all the equipment needed for a professional detail.",
             features: [
-                "Free estimates",
                 "Same-day service available",
-                "Licensed & insured",
+                "We come to your location",
+                "All vehicle types welcome",
                 "Satisfaction guaranteed",
             ],
             neighborhoods: [
-                "Downtown",
-                "South Austin",
-                "East Austin",
-                "North Austin",
+                "Downtown Hemet",
+                "Four Seasons",
+                "Valle Vista",
+                "East Hemet",
             ],
-            mapEmbedUrl: "https://www.google.com/maps?q=Austin,+TX&output=embed",
+            mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106065.96877829656!2d-117.0237!3d33.7475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80db6b3f7f3b3b3b%3A0x3b3b3b3b3b3b3b3b!2sHemet%2C%20CA!5e0!3m2!1sen!2sus",
         },
         {
-            id: "cedar-park",
-            name: "Cedar Park",
-            slug: "cedar-park",
-            headline: "Handyman Services in Cedar Park, TX",
-            description: "Professional handyman repairs and installations in Cedar Park. From punch lists to fixture installs, we make it easy.",
+            id: "san-jacinto",
+            name: "San Jacinto",
+            slug: "san-jacinto",
+            headline: "Mobile Auto Detailing in San Jacinto, CA",
+            description: "Professional mobile detailing service in San Jacinto. We bring the detail shop to you!",
             features: [
-                "Free estimates",
-                "On-time arrival",
-                "Clean, professional work",
-                "Satisfaction guaranteed",
-            ],
-            neighborhoods: [
-                "Buttercup Creek",
-                "Ranch at Brushy Creek",
-                "Twin Creeks",
-                "Cedar Park Town Center",
-            ],
-            mapEmbedUrl: "https://www.google.com/maps?q=Cedar+Park,+TX&output=embed",
-        },
-        {
-            id: "round-rock",
-            name: "Round Rock",
-            slug: "round-rock",
-            headline: "Handyman Services in Round Rock, TX",
-            description: "Trusted handyman services in Round Rock for home repairs, mounting, assembly, and general maintenance.",
-            features: [
-                "Free estimates",
-                "Fast scheduling",
-                "Quality workmanship",
-                "Satisfaction guaranteed",
-            ],
-            neighborhoods: [
-                "Downtown Round Rock",
-                "Brushy Creek",
-                "Forest Creek",
-                "Teravista",
-            ],
-            mapEmbedUrl: "https://www.google.com/maps?q=Round+Rock,+TX&output=embed",
-        },
-        {
-            id: "georgetown",
-            name: "Georgetown",
-            slug: "georgetown",
-            headline: "Handyman Services in Georgetown, TX",
-            description: "Local handyman help in Georgetown for repairs and installations. Simple booking and dependable service.",
-            features: [
-                "Free estimates",
-                "Licensed & insured",
-                "Professional tools & setup",
-                "Satisfaction guaranteed",
-            ],
-            neighborhoods: [
-                "Old Town",
-                "Sun City",
-                "Berry Creek",
-                "Georgetown Village",
-            ],
-            mapEmbedUrl: "https://www.google.com/maps?q=Georgetown,+TX&output=embed",
-        },
-        {
-            id: "leander",
-            name: "Leander",
-            slug: "leander",
-            headline: "Handyman Services in Leander, TX",
-            description: "Handyman services in Leander for common home repairs, mounting, assembly, and installations.",
-            features: [
-                "Free estimates",
-                "Clear communication",
-                "Clean work area",
-                "Satisfaction guaranteed",
-            ],
-            neighborhoods: [
-                "Crystal Falls",
-                "Savannah Ranch",
-                "Travisso",
-                "Block House Creek",
-            ],
-            mapEmbedUrl: "https://www.google.com/maps?q=Leander,+TX&output=embed",
-        },
-        {
-            id: "pflugerville",
-            name: "Pflugerville",
-            slug: "pflugerville",
-            headline: "Handyman Services in Pflugerville, TX",
-            description: "Reliable handyman services in Pflugerville. We handle the small fixes and installs that keep your home running smoothly.",
-            features: [
-                "Free estimates",
-                "Same-day service available",
+                "Convenient mobile service",
                 "Professional results",
+                "Competitive pricing",
+                "Flexible scheduling",
+            ],
+            neighborhoods: [
+                "Downtown San Jacinto",
+                "Soboba Springs",
+            ],
+            mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52965.37!2d-116.9667!3d33.7839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSan%20Jacinto%2C%20CA!5e0!3m2!1sen!2sus",
+        },
+        {
+            id: "menifee",
+            name: "Menifee",
+            slug: "menifee",
+            headline: "Mobile Auto Detailing in Menifee, CA",
+            description: "Menifee residents trust Splashy Bubbles for professional mobile auto detailing. We come to you!",
+            features: [
+                "Serving all of Menifee",
+                "Interior & exterior detailing",
+                "Tesla specialists",
+                "Same-day appointments",
+            ],
+            neighborhoods: [
+                "Sun City",
+                "Quail Valley",
+                "Romoland",
+            ],
+            mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106065.96877829656!2d-117.185!3d33.6781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMenifee%2C%20CA!5e0!3m2!1sen!2sus",
+        },
+        {
+            id: "temecula",
+            name: "Temecula",
+            slug: "temecula",
+            headline: "Mobile Auto Detailing in Temecula, CA",
+            description: "Professional mobile detailing service in Temecula. From wine country to your driveway, we bring the shine!",
+            features: [
+                "Full mobile service",
+                "All detailing packages",
+                "Ceramic coating available",
                 "Satisfaction guaranteed",
             ],
             neighborhoods: [
-                "Stone Hill",
-                "Falcon Pointe",
-                "Wells Point",
-                "Highland Park",
+                "Old Town Temecula",
+                "Redhawk",
+                "Harveston",
+                "Vail Ranch",
             ],
-            mapEmbedUrl: "https://www.google.com/maps?q=Pflugerville,+TX&output=embed",
-        }
+            mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106065.96877829656!2d-117.1484!3d33.4936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sTemecula%2C%20CA!5e0!3m2!1sen!2sus",
+        },
+        {
+            id: "murrieta",
+            name: "Murrieta",
+            slug: "murrieta",
+            headline: "Mobile Auto Detailing in Murrieta, CA",
+            description: "Murrieta's choice for mobile auto detailing. We come to your home or office!",
+            features: [
+                "Convenient mobile service",
+                "Professional-grade products",
+                "Competitive pricing",
+                "Flexible hours",
+            ],
+            neighborhoods: [
+                "Downtown Murrieta",
+                "French Valley",
+                "Los Alamos Hills",
+            ],
+            mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106065.96877829656!2d-117.2139!3d33.5539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMurrieta%2C%20CA!5e0!3m2!1sen!2sus",
+        },
     ],
 
     // ==========================================
@@ -745,6 +719,65 @@ const CONFIG = {
         emergencyService: "Mobile Service Available",
         freeEstimate: "Free Estimate",
         satisfactionGuarantee: "Satisfaction Guaranteed",
+    },
+
+    // ==========================================
+    // GHL (GOHIGHLEVEL) WEBHOOKS
+    // ==========================================
+    ghl: {
+        // Form Submission Webhook
+        // Fires when a user submits the quote/contact form
+        formSubmission: {
+            enabled: true,
+            webhookUrl: "YOUR_GHL_FORM_WEBHOOK_URL_HERE",
+            // Example: "https://services.leadconnectorhq.com/hooks/YOUR_WEBHOOK_ID"
+            // Maps form fields to GHL contact fields
+            fieldMapping: {
+                name: "full_name",           // or "first_name" / "last_name" if split
+                phone: "phone",
+                email: "email",
+                vehicle: "customField.vehicle",  // Custom field in GHL
+                message: "customField.message",  // Custom field in GHL
+            },
+            // Additional data to send with every submission
+            additionalData: {
+                source: "Website Form",
+                tags: ["Website Lead", "Quote Request"],
+                // Assign to specific pipeline/stage if needed
+                // pipelineId: "YOUR_PIPELINE_ID",
+                // pipelineStageId: "YOUR_STAGE_ID",
+            },
+        },
+
+        // Missed Call Text-Back Webhook
+        // Triggers automated SMS when a call is missed
+        missedCallTextBack: {
+            enabled: true,
+            webhookUrl: "YOUR_GHL_MISSED_CALL_WEBHOOK_URL_HERE",
+            // Example: "https://services.leadconnectorhq.com/hooks/YOUR_WEBHOOK_ID"
+            // This webhook should be configured in GHL to:
+            // 1. Trigger on missed call event
+            // 2. Send automated SMS response
+            // 3. Create/update contact in CRM
+            settings: {
+                // Delay before sending text (in seconds)
+                delaySeconds: 30,
+                // Message template (use GHL merge fields)
+                messageTemplate: "Hi! Sorry we missed your call. This is {{business.name}}. How can we help you today? Reply here or call us back at {{business.phone}}.",
+                // Only send during business hours
+                businessHoursOnly: false,
+                // Track as conversion event
+                trackConversion: true,
+            },
+        },
+
+        // Global GHL Settings
+        settings: {
+            locationId: "YOUR_GHL_LOCATION_ID",
+            apiKey: "YOUR_GHL_API_KEY",  // Only if using API calls
+            // Enable debug logging for webhook testing
+            debug: false,
+        },
     },
 };
 
