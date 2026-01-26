@@ -4,79 +4,58 @@
 // ==========================================
 
 const CONFIG = {
-    // ==========================================
-    // BRAND IDENTITY
-    // ==========================================
-    brand: {
-        name: "Reliable Handyman Pros",
-        tagline: "Repairs, Installations & Small Remodels",
-        phone: "(512) 555-0147",
-        phoneRaw: "5125550147",
-        email: "hello@reliablehandymanpros.com",
-        address: "Austin, TX",
-        license: "Licensed • Insured",
-        logo: "logo.png",
-        logoIcon: "tools",
-        yearEstablished: 2018,
-    },
+  // ================================
+  // BRAND IDENTITY
+  // ================================
+  brand: {
+    name: "Reliable Handyman Pros",
+    tagline: "Repairs, Installations & Small Remodels",
+    phone: "(512) 555-0147",
+    phoneRaw: "5125550147",
+    email: "hello@reliablehandymanpros.com",
+    address: "Austin, TX",
+    license: "Licensed • Insured",
+    logo: "logo.png",
+    logoIcon: "tools",
+    yearEstablished: 2018,
+  },
 
-    // ==========================================
-    // THEME & COLORS
-    // ==========================================
-    theme: {
-        primaryColor: "#1a3a5c",
-        primaryDark: "#0f2a42",
-        primaryLight: "#2a5a8c",
-        accentColor: "#f4c430",
-        accentDark: "#d4a820",
-        accentLight: "#ffe066",
-        gold: "#f4c430",
-        green: "#28A745",
-        gradientPrimary: "#1a3a5c",
-        gradientAccent: "#f4c430",
-        glassBg: "rgba(255, 255, 255, 1)",
-        shadowSoft: "0 4px 20px rgba(0, 0, 0, 0.08)",
-        shadowMedium: "0 8px 30px rgba(0, 0, 0, 0.12)",
-        shadowStrong: "0 15px 50px rgba(0, 0, 0, 0.15)",
-    },
+  // ================================
+  // THEME & COLORS
+  // ================================
+  theme: {
+    primaryColor: "#1a3a5c",
+    primaryDark: "#0f2a42",
+    primaryLight: "#2a5a8c",
+    accentColor: "#f4c430",
+    accentDark: "#d4a820",
+    accentLight: "#ffe066",
+    gold: "#f4c430",
+    green: "#28A745",
+    gradientPrimary: "#1a3a5c",
+    gradientAccent: "#f4c430",
+    glassBg: "rgba(255, 255, 255, 1)",
+    shadowSoft: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    shadowMedium: "0 8px 30px rgba(0, 0, 0, 0.12)",
+    shadowStrong: "0 15px 50px rgba(0, 0, 0, 0.15)",
+  },
 
-    // ==========================================
-    // NAVIGATION
-    // ==========================================
-    nav: [
-        { label: "Home", href: "index.html" },
-        { label: "About", href: "about.html" },
-        {
-            label: "Services",
-            href: "services.html",
-            children: [
-                { label: "Drywall Repair", href: "services.html#drywall" },
-                { label: "TV Mounting", href: "services.html#tv-mounting" },
-                { label: "Door & Lock Repair", href: "services.html#doors-locks" },
-                { label: "Fixture Installation", href: "services.html#fixtures" },
-                { label: "Furniture Assembly", href: "services.html#assembly" },
-                { label: "General Repairs", href: "services.html#general-repairs" }
-            ]
-        },
-        {
-            label: "Service Areas",
-            href: "service-area.html",
-            children: [
-                { label: "Austin", href: "service-areas/austin.html" },
-                { label: "Cedar Park", href: "service-areas/cedar-park.html" },
-                { label: "Round Rock", href: "service-areas/round-rock.html" },
-                { label: "Georgetown", href: "service-areas/georgetown.html" },
-                { label: "Leander", href: "service-areas/leander.html" },
-                { label: "Pflugerville", href: "service-areas/pflugerville.html" }
-            ]
-        },
-        { label: "Contact", href: "contact.html" }
-    ]
+  // ================================
+  // NAVIGATION
+  // ================================
+  nav: [
+    { label: "Home", href: "index.html" },
+    { label: "About", href: "about.html" },
+    { label: "Services", href: "services.html" },
+    { label: "Service Areas", href: "service-area.html" },
+    { label: "Contact", href: "contact.html" },
+  ],
 
-    // ==========================================
-    // TOP BAR
-    // ==========================================
-    topBar: {
+  // ================================
+  // TOP BAR
+  // ================================
+  topBar: {
+
         emergencyText: "Mobile Service - We Come To You",
         showAddress: true,
         showHours: true,
