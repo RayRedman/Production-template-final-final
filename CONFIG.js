@@ -18,7 +18,7 @@ const CONFIG = {
         logo: "logo.png",
         logoIcon: "tools",
         yearEstablished: 2018,
-    }
+    },
 
     // ==========================================
     // THEME & COLORS
