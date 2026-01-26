@@ -8,16 +8,16 @@ const CONFIG = {
     // BRAND IDENTITY
     // ==========================================
     brand: {
-        name: "Splashy Bubbles",
-        tagline: "Mobile Auto Detailing - We Come To You",
-        phone: "(951) 708-6705",
-        phoneRaw: "9517086705",
-        email: "splashybubbles@email.com",
-        address: "782 Suncup Cir, Hemet, CA 92543",
-        license: "Fully Insured • Professional Service",
+        name: "Reliable Handyman Pros",
+        tagline: "Repairs, Installations & Small Remodels",
+        phone: "(512) 555-0147",
+        phoneRaw: "5125550147",
+        email: "hello@reliablehandymanpros.com",
+        address: "Austin, TX",
+        license: "Licensed • Insured",
         logo: "logo.png",
-        logoIcon: "car",
-        yearEstablished: null,
+        logoIcon: "tools",
+        yearEstablished: 2018,
     },
 
     // ==========================================
@@ -32,9 +32,9 @@ const CONFIG = {
         accentLight: "#ffe066",
         gold: "#f4c430",
         green: "#28A745",
-        gradientPrimary: "linear-gradient(135deg, #1a3a5c 0%, #2a5a8c 100%)",
-        gradientAccent: "linear-gradient(135deg, #f4c430 0%, #ffe066 100%)",
-        glassBg: "rgba(255, 255, 255, 0.95)",
+        gradientPrimary: "#1a3a5c",
+        gradientAccent: "#f4c430",
+        glassBg: "rgba(255, 255, 255, 1)",
         shadowSoft: "0 4px 20px rgba(0, 0, 0, 0.08)",
         shadowMedium: "0 8px 30px rgba(0, 0, 0, 0.12)",
         shadowStrong: "0 15px 50px rgba(0, 0, 0, 0.15)",
