@@ -50,12 +50,13 @@
     
     /* Button System - LOCKED */
     --btn-height: 52px;
-    --btn-height-sm: 44px;
+    --btn-height-sm: 48px;
     --btn-height-lg: 56px;
     --btn-radius: 0;
-    --btn-padding: 16px 32px;
-    --btn-padding-sm: 12px 24px;
-    --btn-padding-lg: 18px 36px;
+    --btn-font-size: 0.95rem;
+    --btn-font-size-sm: 0.9rem;
+    --btn-font-size-lg: 1rem;
+    --btn-gap: 10px;
     
     /* Heading Spacing - LOCKED */
     --h2-size: clamp(1.75rem, 4vw, 2.25rem);
@@ -539,8 +540,8 @@ section.compact {
     letter-spacing: 0.5px;
 }
 
-.top-bar-cta {
-    padding: var(--space-md) var(--space-xl);
+.top-bar-cta.btn {
+    height: var(--btn-height-sm);
 }
 
 /* ==========================================
@@ -757,32 +758,33 @@ section.compact {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-sm);
+    gap: var(--btn-gap);
     height: var(--btn-height);
-    padding: var(--btn-padding);
+    padding: 0 28px;
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: var(--btn-font-size);
+    line-height: 1;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.75px;
+    white-space: nowrap;
     cursor: pointer;
     transition: all var(--transition-base);
     border: 2px solid transparent;
     border-radius: var(--btn-radius);
-    position: relative;
-    overflow: hidden;
+    text-decoration: none;
 }
 
 .btn-sm {
     height: var(--btn-height-sm);
-    padding: var(--btn-padding-sm);
-    font-size: 0.9rem;
+    padding: 0 24px;
+    font-size: var(--btn-font-size-sm);
 }
 
 .btn-lg {
     height: var(--btn-height-lg);
-    padding: var(--btn-padding-lg);
-    font-size: 1.1rem;
+    padding: 0 32px;
+    font-size: var(--btn-font-size-lg);
 }
 
 .btn-accent {
@@ -798,8 +800,7 @@ section.compact {
 
 .btn-block {
     width: 100%;
-    display: block;
-    text-align: center;
+    justify-content: center;
 }
 
 .btn-primary {
@@ -1137,9 +1138,8 @@ section.compact {
 }
 
 .hero-cta .btn {
-    width: 220px;
-    text-align: center;
-    justify-content: center;
+    min-width: 200px;
+    height: var(--btn-height-lg);
 }
 
 .hero-cta .btn-outline-white {
@@ -1482,8 +1482,7 @@ section.compact {
 
 .quote-form .btn {
     width: 100%;
-    padding: 16px;
-    font-size: 1.15rem;
+    height: var(--btn-height-lg);
     margin-top: var(--space-sm);
 }
 
@@ -2650,18 +2649,22 @@ section.compact {
     align-items: center;
 }
 
+.cta-buttons .btn {
+    height: var(--btn-height-lg);
+}
+
 .cta .btn-primary {
-    background: var(--gradient-primary);
+    background: var(--primary);
     border-color: var(--primary);
 }
 
 .cta-phone {
-    color: white;
+    color: var(--primary);
     font-size: 1.1rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
+    gap: var(--btn-gap);
     transition: opacity var(--transition-base);
 }
 
