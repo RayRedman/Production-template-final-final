@@ -1229,17 +1229,17 @@ section.compact {
 }
 
 /* ==========================================
-   QUOTE FORM SECTION
+   QUOTE FORM SECTION - Premium Estimate
    ========================================== */
 .quote-section {
-    background: var(--bg-light);
+    background: white;
     padding: var(--section-padding) 0;
     position: relative;
 }
 
 .quote-section-inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.1fr;
     gap: var(--space-3xl);
     align-items: start;
     max-width: 1100px;
@@ -1249,47 +1249,33 @@ section.compact {
 @media (max-width: 900px) {
     .quote-section-inner {
         grid-template-columns: 1fr;
-        gap: var(--space-xl);
-        padding-top: var(--space-lg);
+        gap: var(--space-2xl);
     }
 }
 
+/* Left side - informational, not promotional */
 .quote-section-content {
-    padding-right: var(--space-xl);
+    padding-top: var(--space-lg);
 }
 
 @media (max-width: 900px) {
     .quote-section-content {
-        padding-right: 0;
+        padding-top: 0;
         text-align: center;
     }
 }
 
-/* Response time badge */
+/* Remove badge - too promotional */
 .quote-section-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    background: var(--accent);
-    color: white;
-    padding: var(--space-sm) var(--space-md);
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: var(--space-lg);
-}
-
-.quote-section-badge svg {
-    width: 18px;
-    height: 18px;
+    display: none;
 }
 
 .quote-section-title {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--primary);
     margin-bottom: var(--space-md);
-    text-transform: uppercase;
+    text-transform: none;
+    line-height: 1.2;
 }
 
 .quote-section-title::after {
@@ -1297,59 +1283,62 @@ section.compact {
 }
 
 .quote-section-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--text-medium);
-    line-height: 1.7;
-    margin-bottom: var(--space-xl);
+    line-height: 1.8;
+    margin-bottom: var(--space-2xl);
 }
 
+/* Features list - breathable spacing */
 .quote-section-features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
 }
 
 @media (max-width: 900px) {
     .quote-section-features {
-        grid-template-columns: 1fr;
-        max-width: 250px;
+        max-width: 280px;
         margin-left: auto;
         margin-right: auto;
-        margin-bottom: var(--space-xl);
+        margin-bottom: var(--space-2xl);
     }
 }
 
 .quote-feature {
     display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-weight: 600;
+    align-items: flex-start;
+    gap: var(--space-md);
+    font-weight: 500;
     color: var(--text-dark);
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 .quote-feature-icon {
-    width: 24px;
-    height: 24px;
-    background: var(--accent);
-    border-radius: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin-top: 2px;
 }
 
 .quote-feature-icon svg {
     width: 14px;
     height: 14px;
-    color: white;
+    color: var(--accent);
 }
 
-/* Phone CTA */
+/* Phone CTA - subtle, informational */
 .quote-phone-cta {
-    background: var(--primary);
+    background: var(--bg-light);
     padding: var(--space-xl);
-    text-align: center;
+    border-radius: var(--card-radius);
 }
 
 @media (max-width: 900px) {
@@ -1360,85 +1349,85 @@ section.compact {
 }
 
 .quote-phone-label {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-medium);
     font-size: 0.9rem;
     margin-bottom: var(--space-sm);
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 .quote-phone-number {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--space-sm);
-    color: var(--accent);
+    color: var(--primary);
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 1.75rem;
+    font-weight: 700;
     text-decoration: none;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
     transition: color var(--transition-base);
 }
 
+@media (max-width: 900px) {
+    .quote-phone-number {
+        justify-content: center;
+    }
+}
+
 .quote-phone-number:hover {
-    color: white;
+    color: var(--accent);
 }
 
 .quote-phone-number svg {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
 }
 
 .quote-phone-hours {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
 }
 
-/* Quote Form - Job Intake Card Style */
+/* ==========================================
+   QUOTE FORM CARD - The Hero
+   ========================================== */
 .quote-form-wrapper {
     background: var(--primary);
-    padding: var(--space-lg);
-    border-top: 6px solid var(--accent);
-    border: 3px solid #d0d5dd;
-    border-top: 6px solid var(--accent);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    padding: var(--space-xl);
+    border-radius: var(--card-radius);
+    box-shadow: 0 20px 60px rgba(15, 42, 71, 0.25);
+    border: none;
 }
 
 .quote-form-header {
     text-align: center;
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-md);
-    border-bottom: 2px solid rgba(255,255,255,0.15);
+    margin-bottom: var(--space-lg);
 }
 
 .quote-form-title {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.75rem;
-    font-weight: 800;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: white;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    text-transform: none;
     margin-bottom: var(--space-xs);
 }
 
 .quote-form-subtitle {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.85rem;
-    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    font-weight: 400;
 }
 
 .quote-form .form-group {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
 }
 
 .quote-form .form-label {
     display: block;
     color: rgba(255, 255, 255, 0.9);
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+    font-weight: 600;
     margin-bottom: var(--space-xs);
 }
 
@@ -1449,9 +1438,9 @@ section.compact {
     padding: 14px var(--space-md);
     font-size: 1rem;
     font-family: inherit;
-    font-weight: 500;
-    border: 3px solid #d0d5dd;
-    border-radius: 0;
+    font-weight: 400;
+    border: none;
+    border-radius: 4px;
     transition: all var(--transition-base);
     background: white;
 }
@@ -1459,21 +1448,19 @@ section.compact {
 .quote-form .form-input::placeholder,
 .quote-form .form-textarea::placeholder {
     color: #9ca3af;
-    font-weight: 400;
 }
 
 .quote-form .form-input:focus,
 .quote-form .form-select:focus,
 .quote-form .form-textarea:focus {
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(244, 196, 48, 0.3);
+    box-shadow: 0 0 0 3px rgba(244, 196, 48, 0.4);
 }
 
 .quote-form .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-sm);
+    gap: var(--space-md);
 }
 
 @media (max-width: 500px) {
@@ -1485,19 +1472,21 @@ section.compact {
 .quote-form .btn {
     width: 100%;
     height: var(--btn-height-lg);
-    margin-top: var(--space-sm);
+    margin-top: var(--space-md);
+    font-size: 1rem;
 }
 
-/* Trust badge under form */
+/* Trust badge under form - subtle */
 .form-trust-badge {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    margin-top: var(--space-md);
-    padding-top: var(--space-md);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255, 255, 255, 0.8);
+    margin-top: var(--space-lg);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
