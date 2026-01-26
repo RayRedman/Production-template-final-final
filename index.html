@@ -31,6 +31,9 @@
     <!-- HERO -->
     <section class="hero" id="hero"></section>
 
+    <!-- QUOTE FORM SECTION -->
+    <section class="quote-section" id="quote-section"></section>
+
     <!-- SERVICES -->
     <section class="services" id="services"></section>
 
@@ -76,13 +79,8 @@
             <option value="${o.value}">${o.label}</option>
         `).join('');
         
-        // Logo for form - use CONFIG logo or icon
-        const formLogo = CONFIG.brand.logo 
-            ? `<img src="${CONFIG.brand.logo}" alt="${CONFIG.brand.name}" class="form-logo-img">`
-            : `<div class="form-logo-icon">${getIcon(CONFIG.brand.logoIcon)}</div><span class="form-logo-text">${CONFIG.brand.name}</span>`;
-        
         // Trust badges for hero
-        const heroBadges = CONFIG.trustBadges.slice(0, 3).map(b => `
+        const heroBadges = CONFIG.trustBadges.slice(0, 4).map(b => `
             <div class="hero-trust-badge">
                 <span class="hero-trust-icon">${getIcon(b.icon)}</span>
                 <span class="hero-trust-text">${b.text}</span>
@@ -91,7 +89,6 @@
         
         container.innerHTML = `
             <div class="hero-bg"><img src="${bgImage}" alt="Background"></div>
-            <div class="hero-diagonal"></div>
             <div class="container">
                 <div class="hero-inner">
                     <div class="hero-content">
@@ -103,39 +100,59 @@
                         <p class="hero-subhead">${CONFIG.hero.subhead}</p>
                         <div class="hero-trust-row">${heroBadges}</div>
                         <div class="hero-cta">
-                            <a href="${CONFIG.hero.ctaPrimary.href}" class="btn btn-accent btn-lg">${CONFIG.hero.ctaPrimary.text}</a>
-                            <a href="${CONFIG.hero.ctaSecondary.href}" class="btn btn-outline-white btn-lg">${getIcon('phone')} ${CONFIG.hero.ctaSecondary.text}</a>
+                            <a href="#quote" class="btn btn-accent btn-lg">${CONFIG.hero.ctaPrimary.text}</a>
+                            <a href="tel:${CONFIG.brand.phoneRaw}" class="btn btn-outline-white btn-lg">${getIcon('phone')} ${CONFIG.brand.phone}</a>
                         </div>
                     </div>
-                    <div class="hero-form-wrapper" id="quote">
-                        <div class="hero-form-logo">${formLogo}</div>
-                        <div class="hero-form-header">
-                            <div class="hero-form-title">${CONFIG.form.title}</div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderQuoteForm() {
+        const container = document.getElementById('quote-section');
+        if (!container) return;
+        
+        const serviceOptions = CONFIG.form.serviceOptions.map(o => `
+            <option value="${o.value}">${o.label}</option>
+        `).join('');
+        
+        container.innerHTML = `
+            <div class="container">
+                <div class="quote-section-inner">
+                    <div class="quote-section-content">
+                        <h2 class="quote-section-title">${CONFIG.form.title}</h2>
+                        <p class="quote-section-subtitle">${CONFIG.form.subtitle || 'Fill out the form and we\'ll get back to you within 30 minutes.'}</p>
+                        <div class="quote-section-features">
+                            <div class="quote-feature"><span class="quote-feature-icon">${getIcon('check')}</span> Free Estimates</div>
+                            <div class="quote-feature"><span class="quote-feature-icon">${getIcon('check')}</span> Same-Day Response</div>
+                            <div class="quote-feature"><span class="quote-feature-icon">${getIcon('check')}</span> No Obligation</div>
                         </div>
-                        <form class="hero-form" id="hero-form">
-                            ${CONFIG.form.fields.map(field => `
+                    </div>
+                    <div class="quote-form-wrapper" id="quote">
+                        <form class="quote-form" id="hero-form">
+                            <div class="form-row">
+                                ${CONFIG.form.fields.slice(0, 2).map(field => `
+                                    <div class="form-group">
+                                        <input type="${field.type}" name="${field.name}" class="form-input" placeholder="${field.placeholder}${field.required ? ' *' : ''}" ${field.required ? 'required' : ''}>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            ${CONFIG.form.fields.length > 2 ? CONFIG.form.fields.slice(2).map(field => `
                                 <div class="form-group">
-                                    <label class="form-label">${field.label || field.placeholder}${field.required ? ' *' : ''}</label>
-                                    <input type="${field.type}" name="${field.name}" class="form-input" placeholder="${field.placeholder}" ${field.required ? 'required' : ''}>
+                                    <input type="${field.type}" name="${field.name}" class="form-input" placeholder="${field.placeholder}${field.required ? ' *' : ''}" ${field.required ? 'required' : ''}>
                                 </div>
-                            `).join('')}
+                            `).join('') : ''}
                             ${CONFIG.form.showServiceDropdown !== false ? `
                             <div class="form-group">
-                                <label class="form-label">Service Needed *</label>
                                 <select name="service" class="form-select" required>${serviceOptions}</select>
                             </div>
                             ` : ''}
                             <div class="form-group">
-                                <label class="form-label">${CONFIG.form.messageLabel || 'Message (optional)'}</label>
                                 <textarea name="message" class="form-textarea" rows="3" placeholder="${CONFIG.form.messagePlaceholder || 'Tell us about your project...'}"></textarea>
                             </div>
-                            <div class="form-group form-checkbox-group">
-                                <label class="form-checkbox-label">
-                                    <input type="checkbox" name="terms" class="form-checkbox" required>
-                                    <span>${CONFIG.form.consentText || 'I agree to receive text messages and calls about my inquiry.'}</span>
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-accent btn-block">${CONFIG.form.submitText}</button>
+                            <button type="submit" class="btn btn-accent btn-block btn-lg">${CONFIG.form.submitText}</button>
+                            <p class="form-disclaimer">${CONFIG.form.consentText || 'By submitting, you agree to receive calls/texts about your inquiry.'}</p>
                         </form>
                     </div>
                 </div>
@@ -369,6 +386,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         initCommon('home');
         renderHero();
+        renderQuoteForm();
         renderServices();
         renderProcess();
         renderWhyUs();
