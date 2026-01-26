@@ -169,7 +169,7 @@ const CONFIG = {
             text: "Call Now",
             href: "tel:5125550147",
         },
-    }
+    },
 
     // ==========================================
     // LEAD CAPTURE FORM
@@ -198,7 +198,7 @@ const CONFIG = {
             { value: "general-repairs", label: "General Home Repairs" },
             { value: "other", label: "Other / Not Sure" },
         ],
-    }
+    },
 
     // ==========================================
     // TRUST BADGES
