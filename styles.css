@@ -25,9 +25,46 @@
     --text-light: #718096;
     --bg-light: #F7F8FA;
     --bg-white: #FFFFFF;
-    --border: #E2E8F0;
+    --border: #d0d5dd;
+    --border-light: #E2E8F0;
     --gold: #D4A853;
     --green: #28A745;
+    
+    /* ========== LOCKED RHYTHM SYSTEM ========== */
+    
+    /* Container */
+    --container: 1180px;
+    --container-padding: 24px;
+    
+    /* Section Spacing */
+    --section-padding: 96px;
+    --section-padding-compact: 64px;
+    --section-gap: 48px;
+    
+    /* Card System - LOCKED */
+    --card-radius: 0;
+    --card-border: 2px solid var(--border);
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.18);
+    --card-padding: 24px;
+    
+    /* Button System - LOCKED */
+    --btn-height: 52px;
+    --btn-height-sm: 44px;
+    --btn-height-lg: 56px;
+    --btn-radius: 0;
+    --btn-padding: 16px 32px;
+    --btn-padding-sm: 12px 24px;
+    --btn-padding-lg: 18px 36px;
+    
+    /* Heading Spacing - LOCKED */
+    --h2-size: clamp(1.75rem, 4vw, 2.25rem);
+    --h2-margin-bottom: 16px;
+    --h3-size: clamp(1.25rem, 3vw, 1.5rem);
+    --h3-margin-bottom: 12px;
+    --section-title-margin: 48px;
+    
+    /* ========== END LOCKED RHYTHM ========== */
     
     /* Premium additions */
     --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
@@ -121,12 +158,22 @@ img {
 }
 
 /* ==========================================
-   LAYOUT
+   LAYOUT - LOCKED RHYTHM
    ========================================== */
 .container {
-    max-width: 1200px;
+    max-width: var(--container);
     margin: 0 auto;
-    padding: 0 var(--space-lg);
+    padding: 0 var(--container-padding);
+}
+
+/* Section base - all sections use this rhythm */
+section {
+    padding: var(--section-padding) 0;
+    position: relative;
+}
+
+section.compact {
+    padding: var(--section-padding-compact) 0;
 }
 
 @media (max-width: 768px) {
@@ -694,36 +741,49 @@ img {
 }
 
 /* ==========================================
-   BUTTONS - Premium
+   BUTTONS - LOCKED RHYTHM
    ========================================== */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    padding: 16px 32px;
+    height: var(--btn-height);
+    padding: var(--btn-padding);
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: all var(--transition-base);
-    border: none;
-    border-radius: 0;
+    border: 2px solid transparent;
+    border-radius: var(--btn-radius);
     position: relative;
     overflow: hidden;
 }
 
+.btn-sm {
+    height: var(--btn-height-sm);
+    padding: var(--btn-padding-sm);
+    font-size: 0.9rem;
+}
+
+.btn-lg {
+    height: var(--btn-height-lg);
+    padding: var(--btn-padding-lg);
+    font-size: 1.1rem;
+}
+
 .btn-accent {
     background: var(--accent);
+    border-color: var(--accent);
     color: white;
-    border: none;
-    font-weight: 700;
 }
 
 .btn-accent:hover {
     background: var(--accent-dark);
+    border-color: var(--accent-dark);
 }
 
 .btn-block {
@@ -734,23 +794,24 @@ img {
 
 .btn-primary {
     background: var(--primary);
+    border-color: var(--primary);
     color: white;
-    border: none;
 }
 
 .btn-primary:hover {
     background: var(--primary-dark);
+    border-color: var(--primary-dark);
 }
 
 .btn-outline-white {
     background: white;
-    border: none;
+    border-color: white;
     color: var(--primary);
 }
 
 .btn-outline-white:hover {
     background: var(--bg-light);
-    color: var(--primary);
+    border-color: var(--bg-light);
 }
 
 .btn-outline-primary {
@@ -761,6 +822,7 @@ img {
 
 .btn-outline-primary:hover {
     background: var(--primary);
+    border-color: var(--primary);
     color: white;
 }
 
@@ -1680,18 +1742,18 @@ img {
 }
 
 /* ==========================================
-   SECTION HEADERS
+   SECTION HEADERS - LOCKED RHYTHM
    ========================================== */
 .section-header {
     text-align: center;
-    margin-bottom: var(--space-3xl);
+    margin-bottom: var(--section-title-margin);
 }
 
 .section-label {
     display: inline-block;
     color: var(--accent);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: var(--space-sm);
@@ -1706,12 +1768,12 @@ img {
 }
 
 .section-title {
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-size: var(--h2-size);
     color: var(--primary);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--h2-margin-bottom);
     display: inline-block;
     position: relative;
-    padding-bottom: var(--space-sm);
+    padding-bottom: var(--space-md);
     line-height: 1;
     letter-spacing: -0.5px;
 }
@@ -1807,20 +1869,20 @@ img {
     }
 }
 
-/* Photo-forward service card */
+/* Photo-forward service card - LOCKED RHYTHM */
 .service-card {
     background: white;
-    border-radius: 0;
+    border-radius: var(--card-radius);
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 2px solid #d0d5dd;
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
     border-bottom: 4px solid var(--primary);
     transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .service-card:hover {
     border-bottom-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .service-card-image {
@@ -1841,15 +1903,15 @@ img {
 }
 
 .service-card-content {
-    padding: var(--space-lg);
+    padding: var(--card-padding);
 }
 
 .service-card-title {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.3rem;
+    font-size: var(--h3-size);
     font-weight: 700;
     color: var(--primary);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--h3-margin-bottom);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -2143,22 +2205,23 @@ img {
     display: flex;
     gap: var(--space-md);
     background: white;
-    padding: var(--space-lg);
-    border: 2px solid #d0d5dd;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: var(--card-padding);
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
     transition: all var(--transition-base);
 }
 
 .why-us-item:hover {
     border-color: var(--accent);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .why-us-icon {
     width: 52px;
     height: 52px;
     background: var(--primary);
-    border-radius: 0;
+    border-radius: var(--card-radius);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2180,7 +2243,7 @@ img {
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--primary);
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--h3-margin-bottom);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -2439,10 +2502,10 @@ img {
 
 .review-card {
     background: white;
-    padding: var(--space-xl);
-    border-radius: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    border: 2px solid #d0d5dd;
+    padding: var(--card-padding);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
     border-left: 5px solid var(--accent);
     transition: all var(--transition-slow);
     position: relative;
@@ -2461,7 +2524,7 @@ img {
 }
 
 .review-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    box-shadow: var(--card-shadow-hover);
     border-left-color: var(--primary);
 }
 
