@@ -187,6 +187,20 @@ section.compact {
     padding: var(--section-padding-compact) 0;
 }
 
+/* Section divider - clean top border */
+.section-divider-top {
+    border-top: 1px solid var(--border);
+}
+
+/* Dark sections get accent top border */
+.section-dark {
+    background: var(--primary);
+}
+
+.section-dark + section {
+    border-top: 4px solid var(--accent);
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 0 var(--space-md);
@@ -1219,19 +1233,8 @@ section.compact {
    ========================================== */
 .quote-section {
     background: var(--bg-light);
-    padding: var(--space-3xl) 0;
+    padding: var(--section-padding) 0;
     position: relative;
-}
-
-.quote-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: #0F2A47;
-    clip-path: polygon(0 0, 100% 0, 100% 30%, 50% 100%, 0 30%);
 }
 
 .quote-section-inner {
@@ -1241,7 +1244,6 @@ section.compact {
     align-items: start;
     max-width: 1100px;
     margin: 0 auto;
-    padding-top: var(--space-xl);
 }
 
 @media (max-width: 900px) {
@@ -1812,26 +1814,13 @@ section.compact {
    ========================================== */
 .services {
     position: relative;
-    padding: var(--space-3xl) 0;
-    padding-bottom: calc(var(--space-3xl) + 60px);
+    padding: var(--section-padding) 0;
     background: white;
-}
-
-/* Diagonal bottom edge */
-.services::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: var(--primary);
-    clip-path: polygon(0 100%, 0 0, 100% 100%);
 }
 
 .services-header {
     text-align: left;
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--section-gap);
     max-width: 500px;
 }
 
@@ -1964,27 +1953,14 @@ section.compact {
    PROCESS / HOW IT WORKS SECTION
    ========================================== */
 .process {
-    padding: var(--space-3xl) 0;
-    padding-bottom: calc(var(--space-3xl) + 60px);
+    padding: var(--section-padding) 0;
     background: var(--primary);
     position: relative;
 }
 
-/* Diagonal bottom edge */
-.process::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: white;
-    clip-path: polygon(0 100%, 100% 0, 100% 100%);
-}
-
 .process-header {
     text-align: center;
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--section-gap);
 }
 
 .process-label {
@@ -2130,24 +2106,9 @@ section.compact {
    WHY US SECTION
    ========================================== */
 .why-us {
-    padding: var(--space-3xl) 0;
-    padding-top: calc(var(--space-3xl) + 40px);
-    padding-bottom: calc(var(--space-3xl) + 60px);
+    padding: var(--section-padding) 0;
     background: var(--bg-white);
     position: relative;
-    overflow: hidden;
-}
-
-/* Diagonal bottom edge */
-.why-us::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: var(--primary);
-    clip-path: polygon(0 100%, 0 30%, 100% 100%);
 }
 
 .why-us-wrapper {
@@ -2325,40 +2286,14 @@ section.compact {
    OUR WORK / GALLERY SECTION
    ========================================== */
 .our-work {
-    padding: var(--space-3xl) 0;
-    padding-top: calc(var(--space-3xl) + 60px);
-    padding-bottom: calc(var(--space-3xl) + 60px);
+    padding: var(--section-padding) 0;
     background: var(--primary);
     position: relative;
 }
 
-/* Diagonal top edge */
-.our-work::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: var(--bg-white);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
-}
-
-/* Diagonal bottom edge */
-.our-work::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: var(--bg-light);
-    clip-path: polygon(0 100%, 100% 0, 100% 100%);
-}
-
 .our-work-header {
     text-align: left;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--section-gap);
 }
 
 @media (max-width: 768px) {
@@ -2464,23 +2399,9 @@ section.compact {
    REVIEWS SECTION
    ========================================== */
 .reviews {
-    padding: var(--space-3xl) 0;
-    padding-top: calc(var(--space-3xl) + 40px);
-    padding-bottom: calc(var(--space-3xl) + 60px);
+    padding: var(--section-padding) 0;
     background: var(--bg-light);
     position: relative;
-}
-
-/* Diagonal bottom edge */
-.reviews::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: var(--accent);
-    clip-path: polygon(0 100%, 0 0, 100% 100%);
 }
 
 .reviews .section-header {
@@ -2600,24 +2521,10 @@ section.compact {
    CTA SECTION
    ========================================== */
 .cta {
-    padding: var(--space-4xl) 0;
-    padding-top: calc(var(--space-4xl) + 40px);
+    padding: var(--section-padding-compact) 0;
     background: var(--accent);
     text-align: center;
     position: relative;
-    overflow: hidden;
-}
-
-.cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-.cta > * {
-    position: relative;
-    z-index: 1;
 }
 
 .cta-title {
@@ -2686,22 +2593,9 @@ section.compact {
    FAQ SECTION
    ========================================== */
 .faq {
-    padding: var(--space-4xl) 0;
-    padding-top: calc(var(--space-4xl) + 60px);
+    padding: var(--section-padding) 0;
     background: var(--bg-light);
     position: relative;
-}
-
-/* Diagonal top edge */
-.faq::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: var(--accent);
-    clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .faq-list {
