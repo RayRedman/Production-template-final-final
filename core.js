@@ -234,7 +234,7 @@ function renderGallery() {
 }
 
 // ==========================================
-// RENDER TOP BAR
+// RENDER TOP BAR - Contractor Style
 // ==========================================
 function renderTopBar() {
     if (typeof CONFIG === 'undefined') return;
@@ -247,7 +247,6 @@ function renderTopBar() {
     const pathPrefix = isSubfolder ? '../' : '';
     
     const logoIcon = getIcon(CONFIG.brand.logoIcon || 'wrench');
-    const addressDisplay = CONFIG.brand.address.split(',').slice(-2).join(',').trim();
     
     container.innerHTML = `
         <div class="container">
@@ -255,30 +254,29 @@ function renderTopBar() {
                 <a href="${pathPrefix}index.html" class="top-bar-logo">
                     ${CONFIG.brand.logo 
                         ? `<img src="${pathPrefix}${CONFIG.brand.logo}" alt="${CONFIG.brand.name}">` 
-                        : `<div class="top-bar-logo-icon">${logoIcon}</div><span>${CONFIG.brand.name}</span>`}
+                        : `<div class="top-bar-logo-icon">${logoIcon}</div><span class="top-bar-logo-text">${CONFIG.brand.name}</span>`}
                 </a>
-                <div class="top-bar-contact">
-                    <a href="tel:${CONFIG.brand.phoneRaw}" class="top-bar-contact-item">
-                        ${ICONS.phone}
-                        <div class="top-bar-contact-text">
-                            <span class="top-bar-contact-label">Call Anytime</span>
-                            <span class="top-bar-contact-value">${CONFIG.brand.phone}</span>
+                <div class="top-bar-right">
+                    <div class="top-bar-info">
+                        <div class="top-bar-info-item">
+                            ${ICONS.clock}
+                            <span>${CONFIG.brand.hours || 'Mon-Sat: 7AM-7PM'}</span>
                         </div>
-                    </a>
-                    <a href="mailto:${CONFIG.brand.email}" class="top-bar-contact-item">
-                        ${ICONS.email}
-                        <div class="top-bar-contact-text">
-                            <span class="top-bar-contact-label">Email Us</span>
-                            <span class="top-bar-contact-value">${CONFIG.brand.email}</span>
-                        </div>
-                    </a>
-                    <div class="top-bar-contact-item">
-                        ${ICONS.mapPin}
-                        <div class="top-bar-contact-text">
-                            <span class="top-bar-contact-label">Location</span>
-                            <span class="top-bar-contact-value">${addressDisplay}</span>
+                        <div class="top-bar-info-item">
+                            ${ICONS.mapPin}
+                            <span>${CONFIG.brand.address.split(',').slice(-2).join(',').trim()}</span>
                         </div>
                     </div>
+                    <div class="top-bar-phone">
+                        <a href="tel:${CONFIG.brand.phoneRaw}" class="top-bar-phone-link">
+                            ${ICONS.phone}
+                            <div class="top-bar-phone-text">
+                                <span class="top-bar-phone-label">Call Now - Free Estimate</span>
+                                <span class="top-bar-phone-number">${CONFIG.brand.phone}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <a href="#quote" class="btn btn-accent top-bar-cta">${CONFIG.hero.ctaPrimary.text}</a>
                 </div>
                 <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
                     <span></span><span></span><span></span>
@@ -387,7 +385,7 @@ function renderGoogleRatingBadge() {
 }
 
 // ==========================================
-// RENDER HEADER
+// RENDER HEADER - Contractor Style Nav
 // ==========================================
 function renderHeader() {
     if (typeof CONFIG === 'undefined') return;
@@ -412,13 +410,20 @@ function renderHeader() {
         return `<a href="${href}" class="nav-link">${item.label}</a>`;
     }).join('');
     
+    // Build trust indicators for nav
+    const trustIndicators = CONFIG.trustBadges.slice(0, 3).map(b => `
+        <div class="nav-trust-item">
+            ${getIcon(b.icon)}
+            <span>${b.text}</span>
+        </div>
+    `).join('');
+    
     container.innerHTML = `
         <div class="container">
             <div class="header-inner">
                 <nav class="nav-desktop">${navLinks}</nav>
-                <div class="header-cta">
-                    <a href="${pathPrefix}${CONFIG.hero.ctaPrimary.href}" class="btn btn-accent">${CONFIG.hero.ctaPrimary.text}</a>
-                    <a href="tel:${CONFIG.brand.phoneRaw}" class="btn btn-outline">${ICONS.phone} ${CONFIG.brand.phone}</a>
+                <div class="nav-trust-bar">
+                    ${trustIndicators}
                 </div>
             </div>
         </div>

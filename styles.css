@@ -384,7 +384,7 @@ img {
     width: 50px;
     height: 50px;
     background: var(--accent);
-    border-radius: var(--radius-sm);
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -396,47 +396,88 @@ img {
     color: white;
 }
 
-.top-bar-contact {
+.top-bar-logo-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Right side of top bar */
+.top-bar-right {
     display: none;
     align-items: center;
     gap: var(--space-xl);
 }
 
 @media (min-width: 1024px) {
-    .top-bar-contact {
+    .top-bar-right {
         display: flex;
     }
 }
 
-.top-bar-contact-item {
+.top-bar-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.top-bar-info-item {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    color: var(--text-dark);
+    color: var(--text-medium);
+    font-size: 0.85rem;
 }
 
-.top-bar-contact-item svg {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
+.top-bar-info-item svg {
+    width: 18px;
+    height: 18px;
     color: var(--accent);
 }
 
-.top-bar-contact-text {
+/* Big phone CTA */
+.top-bar-phone {
+    background: var(--primary);
+    padding: var(--space-sm) var(--space-lg);
+}
+
+.top-bar-phone-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: white;
+    text-decoration: none;
+}
+
+.top-bar-phone-link svg {
+    width: 24px;
+    height: 24px;
+    color: var(--accent);
+}
+
+.top-bar-phone-text {
     display: flex;
     flex-direction: column;
 }
 
-.top-bar-contact-label {
-    font-size: 0.75rem;
-    color: var(--text-medium);
-    font-weight: 500;
+.top-bar-phone-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
 }
 
-.top-bar-contact-value {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--primary);
+.top-bar-phone-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.top-bar-cta {
+    padding: var(--space-md) var(--space-xl);
 }
 
 /* ==========================================
@@ -614,6 +655,36 @@ img {
 .header-cta .btn-outline svg {
     width: 18px;
     height: 18px;
+}
+
+/* Nav Trust Bar - shows trust badges in nav */
+.nav-trust-bar {
+    display: none;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+@media (min-width: 1024px) {
+    .nav-trust-bar {
+        display: flex;
+    }
+}
+
+.nav-trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-trust-item svg {
+    width: 16px;
+    height: 16px;
+    color: var(--accent);
 }
 
 /* ==========================================
