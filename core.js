@@ -410,21 +410,10 @@ function renderHeader() {
         return `<a href="${href}" class="nav-link">${item.label}</a>`;
     }).join('');
     
-    // Build trust indicators for nav
-    const trustIndicators = CONFIG.trustBadges.slice(0, 3).map(b => `
-        <div class="nav-trust-item">
-            ${getIcon(b.icon)}
-            <span>${b.text}</span>
-        </div>
-    `).join('');
-    
     container.innerHTML = `
         <div class="container">
             <div class="header-inner">
                 <nav class="nav-desktop">${navLinks}</nav>
-                <div class="nav-trust-bar">
-                    ${trustIndicators}
-                </div>
             </div>
         </div>
     `;

@@ -504,15 +504,15 @@ img {
 .header-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: 60px;
     gap: var(--space-lg);
 }
 
-/* On mobile, show hamburger on the right, logo text on the left */
+/* On mobile, hide header (nav is in mobile menu) */
 @media (max-width: 1023px) {
-    .header-inner {
-        justify-content: flex-end;
+    .header {
+        display: none;
     }
 }
 
