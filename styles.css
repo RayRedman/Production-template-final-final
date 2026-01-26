@@ -194,12 +194,16 @@ img {
 }
 
 /* ==========================================
-   TRUST LOGOS BAR
+   TRUST LOGOS BAR - Certifications Strip
    ========================================== */
 .trust-logos-bar {
-    background: var(--bg-white);
-    border-bottom: 1px solid var(--border);
+    background: var(--bg-light);
+    border-bottom: 3px solid var(--accent);
     padding: var(--space-md) 0;
+}
+
+.trust-logos-bar:empty {
+    display: none;
 }
 
 .trust-logos-inner {
@@ -211,11 +215,12 @@ img {
 }
 
 .trust-logos-title {
-    font-size: 0.8rem;
-    color: var(--text-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    color: var(--primary);
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .trust-logo-item {
@@ -223,27 +228,29 @@ img {
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    background: var(--bg-light);
-    border-radius: var(--radius-md);
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 0;
     transition: all var(--transition-base);
 }
 
 .trust-logo-item:hover {
-    background: var(--border);
+    border-color: var(--accent);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
 }
 
 .trust-logo-icon {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .trust-logo-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
 
 .trust-logo-icon.google { color: #4285F4; }
@@ -253,25 +260,24 @@ img {
 .trust-logo-icon.yelp { color: #D32323; }
 
 .trust-logo-name {
+    font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .trust-logo-rating {
-    font-weight: 700;
-    font-size: 0.85rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
     color: var(--accent);
 }
 
 @media (max-width: 768px) {
-    .trust-logos-title {
-        width: 100%;
-        text-align: center;
-    }
-    
-    .trust-logos-inner {
-        gap: var(--space-md);
+    .trust-logos-bar {
+        display: none;
     }
 }
 

@@ -74,12 +74,17 @@ const CONFIG = {
     },
 
     // ==========================================
-    // TRUST LOGOS
+    // TRUST LOGOS - Certifications bar under nav
     // ==========================================
     trustLogos: {
-        enabled: false,
+        enabled: true,
         title: "Trusted & Certified",
-        logos: [],
+        logos: [
+            { name: "Google", rating: "4.9" },
+            { name: "BBB", rating: "A+" },
+            { name: "HomeAdvisor", rating: null },
+            { name: "Angi", rating: null },
+        ],
     },
 
     // ==========================================

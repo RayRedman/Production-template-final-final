@@ -759,6 +759,7 @@ function initCommon(pageKey = 'home') {
     renderPromoBanner();
     renderTopBar();
     renderHeader();
+    renderTrustLogosBar();
     
     // Initialize scroll animations after a short delay to let content render
     setTimeout(initScrollAnimations, 100);
