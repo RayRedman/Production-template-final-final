@@ -1023,24 +1023,26 @@ img {
     top: 0;
     left: 0;
     right: 0;
-    height: 80px;
+    height: 100px;
     background: #0F2A47;
-    clip-path: polygon(0 0, 100% 0, 100% 20%, 50% 100%, 0 20%);
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 50% 100%, 0 30%);
 }
 
 .quote-section-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl);
-    align-items: center;
+    align-items: start;
     max-width: 1100px;
     margin: 0 auto;
+    padding-top: var(--space-xl);
 }
 
 @media (max-width: 900px) {
     .quote-section-inner {
         grid-template-columns: 1fr;
         gap: var(--space-xl);
+        padding-top: var(--space-lg);
     }
 }
 
@@ -1053,6 +1055,26 @@ img {
         padding-right: 0;
         text-align: center;
     }
+}
+
+/* Response time badge */
+.quote-section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: var(--accent);
+    color: white;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-lg);
+}
+
+.quote-section-badge svg {
+    width: 18px;
+    height: 18px;
 }
 
 .quote-section-title {
@@ -1074,14 +1096,19 @@ img {
 }
 
 .quote-section-features {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
+    margin-bottom: var(--space-xl);
 }
 
 @media (max-width: 900px) {
     .quote-section-features {
-        align-items: center;
+        grid-template-columns: 1fr;
+        max-width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: var(--space-xl);
     }
 }
 
@@ -1101,6 +1128,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .quote-feature-icon svg {
@@ -1109,11 +1137,81 @@ img {
     color: white;
 }
 
+/* Phone CTA */
+.quote-phone-cta {
+    background: var(--primary);
+    padding: var(--space-xl);
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .quote-phone-cta {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
+
+.quote-phone-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.quote-phone-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    color: var(--accent);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    text-decoration: none;
+    margin-bottom: var(--space-sm);
+    transition: color var(--transition-base);
+}
+
+.quote-phone-number:hover {
+    color: white;
+}
+
+.quote-phone-number svg {
+    width: 28px;
+    height: 28px;
+}
+
+.quote-phone-hours {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
 /* Quote Form */
 .quote-form-wrapper {
     background: var(--primary);
     padding: var(--space-xl);
     border-top: 5px solid var(--accent);
+}
+
+.quote-form-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.quote-form-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--space-xs);
+}
+
+.quote-form-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
 }
 
 .quote-form .form-group {
@@ -1156,6 +1254,23 @@ img {
     width: 100%;
     padding: 18px;
     font-size: 1.2rem;
+}
+
+/* Trust badge under form */
+.form-trust-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+.form-trust-badge svg {
+    width: 16px;
+    height: 16px;
+    color: var(--accent);
 }
 
 .form-disclaimer {
