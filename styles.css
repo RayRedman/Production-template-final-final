@@ -1085,6 +1085,54 @@ img {
     }
 }
 
+/* Hero Trust Strip - Dense single line */
+.hero-trust-strip {
+    background: var(--accent);
+    padding: var(--space-sm) 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.hero-trust-strip-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.hero-trust-strip-item {
+    color: var(--primary);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.hero-trust-strip-divider {
+    color: var(--primary);
+    opacity: 0.5;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .hero-trust-strip {
+        padding: var(--space-xs) 0;
+    }
+    
+    .hero-trust-strip-item {
+        font-size: 0.75rem;
+    }
+    
+    .hero-trust-strip-inner {
+        gap: var(--space-xs);
+    }
+}
+
 /* ==========================================
    QUOTE FORM SECTION
    ========================================== */

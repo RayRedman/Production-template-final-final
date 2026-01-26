@@ -163,6 +163,16 @@ const CONFIG = {
             "Same-Day Service",
             "Satisfaction Guaranteed"
         ],
+        trustStrip: {
+            enabled: true,
+            items: [
+                "Licensed & Insured",
+                "4.9 ★ Google Rating",
+                "Same-Day Service",
+                "Satisfaction Guaranteed",
+                "Serving Austin Since 2018"
+            ]
+        },
         guaranteeBadge: {
             enabled: false,
             text: "",
