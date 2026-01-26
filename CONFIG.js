@@ -386,7 +386,7 @@ const CONFIG = {
         { value: "Free", label: "Estimates" },
         { value: "Same-Day", label: "Service" },
         { value: "100%", label: "Satisfaction" }
-    ]
+    ],
 
     // ==========================================
     // REVIEWS
