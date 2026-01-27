@@ -270,10 +270,7 @@ function renderTopBar() {
                     <div class="top-bar-phone">
                         <a href="tel:${CONFIG.brand.phoneRaw}" class="top-bar-phone-link">
                             ${ICONS.phone}
-                            <div class="top-bar-phone-text">
-                                <span class="top-bar-phone-label">${CONFIG.topBar?.phoneLabel || CONFIG.ui?.phoneLabel || 'Call Now - Free Estimate'}</span>
-                                <span class="top-bar-phone-number">${CONFIG.brand.phone}</span>
-                            </div>
+                            <span class="top-bar-phone-number">${CONFIG.brand.phone}</span>
                         </a>
                     </div>
                     <a href="#quote" class="btn btn-accent top-bar-cta">${CONFIG.hero.ctaPrimary.text}</a>
