@@ -11,8 +11,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Resolve paths relative to project root
-const projectRoot = path.resolve(__dirname, '..');
+// Resolve paths relative to project root (script is now in root)
+const projectRoot = __dirname;
 const configPath = path.join(projectRoot, 'CONFIG.js');
 const servicesDir = path.join(projectRoot, 'services');
 
