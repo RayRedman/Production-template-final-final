@@ -387,7 +387,20 @@ function renderHeader() {
     if (!container) return;
     
     const navLinks = CONFIG.nav.map(item => {
-        const href = '/' + item.href;
+        // Special handling for services dropdown - derived from CONFIG.services.items[]
+        if (item.type === 'servicesDropdown') {
+            const serviceLinks = CONFIG.services.items.map(s => {
+                const slug = s.slug || s.id;
+                return `<a href="/services/${slug}.html" class="nav-dropdown-link">${s.title}</a>`;
+            }).join('');
+            return `<div class="nav-dropdown">
+                <span class="nav-link nav-dropdown-toggle">${item.label}</span>
+                <div class="nav-dropdown-menu">
+                    ${serviceLinks}
+                </div>
+            </div>`;
+        }
+        // Standard dropdown with explicit children
         if (item.children) {
             return `<div class="nav-dropdown">
                 <span class="nav-link nav-dropdown-toggle">${item.label}</span>
@@ -396,6 +409,8 @@ function renderHeader() {
                 </div>
             </div>`;
         }
+        // Regular nav link
+        const href = '/' + item.href;
         return `<a href="${href}" class="nav-link">${item.label}</a>`;
     }).join('');
     
@@ -456,7 +471,23 @@ function renderMobileMenu() {
     const chevronDown = `<svg class="mobile-nav-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
     
     const mobileNavLinks = CONFIG.nav.map(item => {
-        const href = '/' + item.href;
+        // Special handling for services dropdown - derived from CONFIG.services.items[]
+        if (item.type === 'servicesDropdown') {
+            const serviceLinks = CONFIG.services.items.map(s => {
+                const slug = s.slug || s.id;
+                return `<a href="/services/${slug}.html" class="mobile-nav-child">${s.title}</a>`;
+            }).join('');
+            return `<div class="mobile-nav-dropdown">
+                <button class="mobile-nav-link mobile-nav-toggle" type="button">
+                    ${item.label}
+                    ${chevronDown}
+                </button>
+                <div class="mobile-nav-children">
+                    ${serviceLinks}
+                </div>
+            </div>`;
+        }
+        // Standard dropdown with explicit children
         if (item.children) {
             return `<div class="mobile-nav-dropdown">
                 <button class="mobile-nav-link mobile-nav-toggle" type="button">
@@ -468,6 +499,8 @@ function renderMobileMenu() {
                 </div>
             </div>`;
         }
+        // Regular nav link
+        const href = '/' + item.href;
         return `<a href="${href}" class="mobile-nav-link">${item.label}</a>`;
     }).join('');
     

@@ -47,7 +47,7 @@ const CONFIG = {
   nav: [
     { label: "Home", href: "index.html" },
     { label: "Our Work", href: "our-work.html" },
-    { label: "Services", href: "services.html" },
+    { label: "Services", type: "servicesDropdown" },
     { label: "Service Areas", href: "service-area.html" },
     { label: "Contact", href: "contact.html" },
   ],
