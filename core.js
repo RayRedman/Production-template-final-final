@@ -710,7 +710,14 @@ function renderFooter() {
         </div>
         <div class="footer-bottom">
             <div class="container">
-                &copy; ${CONFIG.footer.copyrightYear} ${CONFIG.brand.name}. ${CONFIG.ui.allRightsReserved}
+                <div class="footer-bottom-content">
+                    <span>&copy; ${CONFIG.footer.copyrightYear} ${CONFIG.brand.name}. ${CONFIG.ui.allRightsReserved}</span>
+                    <span class="footer-legal-links">
+                        <a href="/privacy-policy.html">Privacy Policy</a>
+                        <span class="footer-legal-divider">|</span>
+                        <a href="/terms.html">Terms of Service</a>
+                    </span>
+                </div>
             </div>
         </div>
     `;
