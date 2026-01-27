@@ -242,8 +242,9 @@ function renderTopBar() {
     const container = document.getElementById('top-bar');
     if (!container) return;
     
-    // Detect if we're in a subfolder (like /service-areas/)
-    const isSubfolder = window.location.pathname.includes('/service-areas/');
+    // Detect if we're in a subfolder (like /service-areas/ or /services/)
+    const pathParts = window.location.pathname.split('/').filter(p => p && !p.includes('.'));
+    const isSubfolder = pathParts.length > 0;
     const pathPrefix = isSubfolder ? '../' : '';
     
     const logoIcon = getIcon(CONFIG.brand.logoIcon || 'wrench');
@@ -390,8 +391,9 @@ function renderHeader() {
     const container = document.getElementById('header');
     if (!container) return;
     
-    // Detect if we're in a subfolder (like /service-areas/)
-    const isSubfolder = window.location.pathname.includes('/service-areas/');
+    // Detect if we're in a subfolder (like /service-areas/ or /services/)
+    const pathParts = window.location.pathname.split('/').filter(p => p && !p.includes('.'));
+    const isSubfolder = pathParts.length > 0;
     const pathPrefix = isSubfolder ? '../' : '';
     
     const navLinks = CONFIG.nav.map(item => {
@@ -461,8 +463,9 @@ function renderMobileMenu() {
     const container = document.getElementById('mobile-menu');
     if (!container) return;
     
-    // Detect if we're in a subfolder (like /service-areas/)
-    const isSubfolder = window.location.pathname.includes('/service-areas/');
+    // Detect if we're in a subfolder (like /service-areas/ or /services/)
+    const pathParts = window.location.pathname.split('/').filter(p => p && !p.includes('.'));
+    const isSubfolder = pathParts.length > 0;
     const pathPrefix = isSubfolder ? '../' : '';
     
     const chevronDown = `<svg class="mobile-nav-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
@@ -634,8 +637,9 @@ function renderFooter() {
     const container = document.getElementById('footer');
     if (!container) return;
     
-    // Detect if we're in a subfolder (like /service-areas/)
-    const isSubfolder = window.location.pathname.includes('/service-areas/');
+    // Detect if we're in a subfolder (like /service-areas/ or /services/)
+    const pathParts = window.location.pathname.split('/').filter(p => p && !p.includes('.'));
+    const isSubfolder = pathParts.length > 0;
     const pathPrefix = isSubfolder ? '../' : '';
     
     const quickLinks = CONFIG.footer.quickLinks.map(l => `
