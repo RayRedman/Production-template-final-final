@@ -2386,6 +2386,26 @@ section.compact {
     color: white;
 }
 
+/* Work item caption - visible on hover */
+.work-item-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 16px;
+    background: rgba(15, 42, 71, 0.9);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.work-item:hover .work-item-caption {
+    opacity: 1;
+}
+
 /* Remove the large spanning - just regular grid */
 .work-item-large {
     /* No special styling */
