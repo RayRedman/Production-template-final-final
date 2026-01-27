@@ -271,7 +271,7 @@ function renderTopBar() {
                         <a href="tel:${CONFIG.brand.phoneRaw}" class="top-bar-phone-link">
                             ${ICONS.phone}
                             <div class="top-bar-phone-text">
-                                <span class="top-bar-phone-label">Call Now - Free Estimate</span>
+                                <span class="top-bar-phone-label">${CONFIG.topBar?.phoneLabel || CONFIG.ui?.phoneLabel || 'Call Now - Free Estimate'}</span>
                                 <span class="top-bar-phone-number">${CONFIG.brand.phone}</span>
                             </div>
                         </a>
@@ -766,10 +766,10 @@ function renderStickyMobileCTA() {
     container.innerHTML = `
         <div class="sticky-mobile-cta-inner">
             <a href="tel:${CONFIG.brand.phoneRaw}" class="btn btn-call">
-                ${ICONS.phone} Call Now
+                ${ICONS.phone} ${CONFIG.ui?.callNowShort || 'Call Now'}
             </a>
             <a href="${CONFIG.hero.ctaPrimary.href}" class="btn btn-quote">
-                Free Quote
+                ${CONFIG.ui?.freeQuoteShort || 'Free Quote'}
             </a>
         </div>
     `;

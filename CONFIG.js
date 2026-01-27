@@ -56,11 +56,11 @@ const CONFIG = {
   // TOP BAR
   // ================================
   topBar: {
-
         emergencyText: "Mobile Service - We Come To You",
         showAddress: true,
         showHours: true,
-        hours: "Mon-Sat: 8AM-6PM",
+        hours: "Mon-Sat: 7AM-7PM",
+        phoneLabel: "Call Now - Free Estimate",
     },
 
     // ==========================================
@@ -758,6 +758,9 @@ const CONFIG = {
     // ==========================================
     ui: {
         callNow: "Call Now",
+        callNowShort: "Call Now",
+        freeQuoteShort: "Free Quote",
+        phoneLabel: "Call Now - Free Estimate",
         getQuote: "Get Quote",
         learnMore: "Learn More",
         viewAll: "View All",
