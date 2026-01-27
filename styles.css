@@ -2406,29 +2406,6 @@ section.compact {
     opacity: 1;
 }
 
-/* ===========================================
-   OUR WORK OVERLAY FIX - High specificity
-   Prevents overlay content from jumping to corner on hover
-   =========================================== */
-.our-work .work-item-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--transition-base);
-}
-
-.our-work .work-item:hover .work-item-overlay {
-    opacity: 1;
-}
-
-.our-work .work-item-icon {
-    position: static;
-    transform: none;
-}
-
 /* Remove the large spanning - just regular grid */
 .work-item-large {
     /* No special styling */
@@ -3803,21 +3780,19 @@ section.compact {
     }
 }
 
-/* === P0 FIX: Our Work overlay icon must stay centered on hover (no jump) === */
+/* === FINAL: Our Work overlay centering (wins cascade) === */
 .our-work .work-item-overlay {
   position: absolute;
   inset: 0;
-  display: block; /* stop relying on flex centering */
-}
-.our-work .work-item-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) !important;
-  line-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.our-work .work-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
 }
 .our-work .work-item-icon svg {
   display: block;
