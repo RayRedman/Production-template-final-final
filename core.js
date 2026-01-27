@@ -242,19 +242,14 @@ function renderTopBar() {
     const container = document.getElementById('top-bar');
     if (!container) return;
     
-    // Detect if we're in a subfolder (like /service-areas/ or /services/)
-    const pathParts = window.location.pathname.split('/').filter(p => p && !p.includes('.'));
-    const isSubfolder = pathParts.length > 0;
-    const pathPrefix = isSubfolder ? '../' : '';
-    
     const logoIcon = getIcon(CONFIG.brand.logoIcon || 'wrench');
     
     container.innerHTML = `
         <div class="container">
             <div class="top-bar-inner">
-                <a href="${pathPrefix}index.html" class="top-bar-logo">
+                <a href="/index.html" class="top-bar-logo">
                     ${CONFIG.brand.logo 
-                        ? `<img src="${pathPrefix}${CONFIG.brand.logo}" alt="${CONFIG.brand.name}">` 
+                        ? `<img src="/${CONFIG.brand.logo}" alt="${CONFIG.brand.name}">` 
                         : `<div class="top-bar-logo-icon">${logoIcon}</div><span class="top-bar-logo-text">${CONFIG.brand.name}</span>`}
                 </a>
                 <div class="top-bar-right">
@@ -391,18 +386,13 @@ function renderHeader() {
     const container = document.getElementById('header');
     if (!container) return;
     
-    // Detect if we're in a subfolder (like /service-areas/ or /services/)
-    const pathParts = window.location.pathname.split('/').filter(p => p && !p.includes('.'));
-    const isSubfolder = pathParts.length > 0;
-    const pathPrefix = isSubfolder ? '../' : '';
-    
     const navLinks = CONFIG.nav.map(item => {
-        const href = pathPrefix + item.href;
+        const href = '/' + item.href;
         if (item.children) {
             return `<div class="nav-dropdown">
                 <span class="nav-link nav-dropdown-toggle">${item.label}</span>
                 <div class="nav-dropdown-menu">
-                    ${item.children.map(c => `<a href="${pathPrefix}${c.href}" class="nav-dropdown-link">${c.label}</a>`).join('')}
+                    ${item.children.map(c => `<a href="/${c.href}" class="nav-dropdown-link">${c.label}</a>`).join('')}
                 </div>
             </div>`;
         }
@@ -463,15 +453,10 @@ function renderMobileMenu() {
     const container = document.getElementById('mobile-menu');
     if (!container) return;
     
-    // Detect if we're in a subfolder (like /service-areas/ or /services/)
-    const pathParts = window.location.pathname.split('/').filter(p => p && !p.includes('.'));
-    const isSubfolder = pathParts.length > 0;
-    const pathPrefix = isSubfolder ? '../' : '';
-    
     const chevronDown = `<svg class="mobile-nav-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
     
     const mobileNavLinks = CONFIG.nav.map(item => {
-        const href = pathPrefix + item.href;
+        const href = '/' + item.href;
         if (item.children) {
             return `<div class="mobile-nav-dropdown">
                 <button class="mobile-nav-link mobile-nav-toggle" type="button">
@@ -479,7 +464,7 @@ function renderMobileMenu() {
                     ${chevronDown}
                 </button>
                 <div class="mobile-nav-children">
-                    ${item.children.map(c => `<a href="${pathPrefix}${c.href}" class="mobile-nav-child">${c.label}</a>`).join('')}
+                    ${item.children.map(c => `<a href="/${c.href}" class="mobile-nav-child">${c.label}</a>`).join('')}
                 </div>
             </div>`;
         }
@@ -490,7 +475,7 @@ function renderMobileMenu() {
         <nav>${mobileNavLinks}</nav>
         <div class="mobile-menu-cta">
             <a href="tel:${CONFIG.brand.phoneRaw}" class="btn btn-primary">${ICONS.phone} ${CONFIG.ui.callNow} ${CONFIG.brand.phone}</a>
-            <a href="${pathPrefix}${CONFIG.hero.ctaPrimary.href}" class="btn btn-accent">${CONFIG.hero.ctaPrimary.text}</a>
+            <a href="${CONFIG.hero.ctaPrimary.href.startsWith('#') ? CONFIG.hero.ctaPrimary.href : '/' + CONFIG.hero.ctaPrimary.href}" class="btn btn-accent">${CONFIG.hero.ctaPrimary.text}</a>
         </div>
     `;
     
@@ -637,13 +622,8 @@ function renderFooter() {
     const container = document.getElementById('footer');
     if (!container) return;
     
-    // Detect if we're in a subfolder (like /service-areas/ or /services/)
-    const pathParts = window.location.pathname.split('/').filter(p => p && !p.includes('.'));
-    const isSubfolder = pathParts.length > 0;
-    const pathPrefix = isSubfolder ? '../' : '';
-    
     const quickLinks = CONFIG.footer.quickLinks.map(l => `
-        <li><a href="${pathPrefix}${l.href}">${l.label}</a></li>
+        <li><a href="/${l.href}">${l.label}</a></li>
     `).join('');
     
     container.innerHTML = `
