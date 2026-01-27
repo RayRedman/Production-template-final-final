@@ -9,6 +9,7 @@ const CONFIG = {
   // ================================
   brand: {
     name: "Reliable Handyman Pros",
+    companySlug: "reliable-handyman-pros",
     tagline: "Repairs, Installations & Small Remodels",
     phone: "(512) 555-0147",
     phoneRaw: "5125550147",
@@ -48,7 +49,7 @@ const CONFIG = {
     { label: "Home", href: "index.html" },
     { label: "Our Work", href: "our-work.html" },
     { label: "Services", type: "servicesDropdown" },
-    { label: "Service Areas", href: "service-area.html" },
+    { label: "Service Areas", type: "serviceAreasDropdown" },
     { label: "Contact", href: "contact.html" },
   ],
 
@@ -110,6 +111,10 @@ const CONFIG = {
         serviceArea: {
             title: "Service Areas | Reliable Handyman Pros",
             description: "Handyman services in Austin, Cedar Park, Round Rock, Georgetown, Leander, Pflugerville and surrounding areas.",
+        },
+        ourWork: {
+            title: "Our Work | Reliable Handyman Pros",
+            description: "See examples of our recent handyman projects in Austin. Drywall repairs, TV mounting, door fixes, and more.",
         },
     },
 

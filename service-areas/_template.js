@@ -1,67 +1,61 @@
 // ==========================================
-// SERVICE PAGE TEMPLATE ENGINE
-// Canonical service rendering logic - single source of truth
+// SERVICE AREA PAGE TEMPLATE ENGINE
+// Canonical service area rendering logic - single source of truth
 // ==========================================
 
 (function() {
     'use strict';
     
     // ==========================================
-    // GET SERVICE FROM PATHNAME
+    // GET SERVICE AREA FROM PATHNAME
     // ==========================================
-    function getServiceFromPathname() {
-        // Extract slug from pathname: /services/tv-mounting.html -> tv-mounting
+    function getAreaFromPathname() {
+        // Extract slug from pathname: /service-areas/austin.html -> austin
         const pathname = window.location.pathname;
-        const filename = pathname.split('/').pop(); // e.g., "tv-mounting.html"
-        const slug = filename.replace('.html', '');  // e.g., "tv-mounting"
+        const filename = pathname.split('/').pop(); // e.g., "austin.html"
+        const slug = filename.replace('.html', '');  // e.g., "austin"
         
-        if (slug && slug !== '_template' && CONFIG.services?.items) {
+        if (slug && slug !== '_template' && CONFIG.serviceAreas) {
             // Find by slug (priority) or id (fallback)
-            const found = CONFIG.services.items.find(s => 
-                s.slug === slug || s.id === slug
+            const found = CONFIG.serviceAreas.find(a => 
+                a.slug === slug || a.id === slug
             );
             if (found) return found;
         }
         
-        // Fallback to first service
-        return CONFIG.services?.items?.[0] || null;
+        // Fallback to first area
+        return CONFIG.serviceAreas?.[0] || null;
     }
     
-    // Current service (set on load)
-    let currentService = null;
+    // Current area (set on load)
+    let currentArea = null;
     
     // ==========================================
     // SEO - Set page title and meta
     // ==========================================
-    function setServiceSEO(service) {
-        if (!service) return;
-        
-        const location = CONFIG.brand.address || '';
-        const cityState = location.split(',').slice(-2).join(',').trim() || location;
+    function setAreaSEO(area) {
+        if (!area) return;
         
         // Title
-        const title = service.metaTitle || 
-            `${service.title} in ${cityState} | ${CONFIG.brand.name}`;
+        const title = area.metaTitle || 
+            `${area.name} Handyman Services | ${CONFIG.brand.name}`;
         document.getElementById('page-title').textContent = title;
         
         // Description
-        const description = service.metaDescription || 
-            `${service.fullDesc || service.shortDesc} ${CONFIG.seo?.services?.description || ''}`.trim();
+        const description = area.metaDescription || area.description || 
+            `Professional handyman services in ${area.name}. ${CONFIG.brand.tagline}`;
         document.getElementById('meta-description').setAttribute('content', description);
     }
     
     // ==========================================
-    // HERO - Service-specific
+    // HERO - Area-specific
     // ==========================================
     function renderHero() {
         const container = document.getElementById('hero');
-        if (!container || !currentService) return;
+        if (!container || !currentArea) return;
         
-        const location = CONFIG.brand.address || '';
-        const cityState = location.split(',').slice(-2).join(',').trim() || location;
-        
-        // Use service image or fallback to homepage hero
-        const bgImage = currentService.image || CONFIG.hero?.backgroundImage || getImage('hero');
+        // Use area image or fallback to homepage hero
+        const bgImage = currentArea.image || CONFIG.hero?.backgroundImage || getImage('hero');
         
         // Trust badges for hero
         const heroBadges = CONFIG.trustBadges.slice(0, 4).map(b => `
@@ -83,16 +77,15 @@
             : '';
         
         container.innerHTML = `
-            <div class="hero-bg"><img src="${bgImage}" alt="${currentService.title}"></div>
+            <div class="hero-bg"><img src="${bgImage}" alt="${currentArea.name}"></div>
             <div class="container">
                 <div class="hero-inner">
                     <div class="hero-content">
                         <div class="hero-label">${CONFIG.hero.label || 'Professional Service'}</div>
                         <h1 class="hero-headline">
-                            ${currentService.title}
-                            <span class="hero-headline-accent">in ${cityState}</span>
+                            ${currentArea.headline || `Handyman Services in ${currentArea.name}`}
                         </h1>
-                        <p class="hero-subhead">${currentService.fullDesc || currentService.shortDesc}</p>
+                        <p class="hero-subhead">${currentArea.description}</p>
                         <div class="hero-trust-row">${heroBadges}</div>
                         <div class="hero-cta">
                             <a href="#quote" class="btn btn-accent btn-lg">${CONFIG.hero.ctaPrimary.text}</a>
@@ -106,15 +99,14 @@
     }
     
     // ==========================================
-    // QUOTE FORM - With service pre-selected
+    // QUOTE FORM - With area context
     // ==========================================
     function renderQuoteForm() {
         const container = document.getElementById('quote-section');
         if (!container) return;
         
         const serviceOptions = CONFIG.form.serviceOptions.map(o => {
-            const selected = currentService && (o.value === currentService.id || o.value === currentService.title) ? 'selected' : '';
-            return `<option value="${o.value}" ${selected}>${o.label}</option>`;
+            return `<option value="${o.value}">${o.label}</option>`;
         }).join('');
         
         const formFeatures = (CONFIG.form.features || [
@@ -157,8 +149,8 @@
                         </div>
                         <form class="quote-form" id="hero-form">
                             <!-- Universal tracking fields -->
-                            <input type="hidden" name="pageType" value="service">
-                            <input type="hidden" name="pageSlug" value="${currentService ? (currentService.slug || currentService.id) : ''}">
+                            <input type="hidden" name="pageType" value="area">
+                            <input type="hidden" name="pageSlug" value="${currentArea ? (currentArea.slug || currentArea.id) : ''}">
                             <input type="hidden" name="companySlug" value="${CONFIG.brand.companySlug}">
                             <input type="hidden" name="utm_source" value="${new URLSearchParams(window.location.search).get('utm_source') || ''}">
                             <input type="hidden" name="utm_medium" value="${new URLSearchParams(window.location.search).get('utm_medium') || ''}">
@@ -204,19 +196,19 @@
     }
     
     // ==========================================
-    // WHAT'S INCLUDED - Uses services section style
+    // AREA FEATURES - Uses services section style
     // ==========================================
-    function renderWhatsIncluded() {
+    function renderAreaFeatures() {
         const container = document.getElementById('services');
-        if (!container || !currentService) return;
+        if (!container || !currentArea) return;
         
-        // If service has no features, hide the section
-        if (!currentService.features || currentService.features.length === 0) {
+        // If area has no features, hide the section
+        if (!currentArea.features || currentArea.features.length === 0) {
             container.style.display = 'none';
             return;
         }
         
-        const features = currentService.features.map(f => `
+        const features = currentArea.features.map(f => `
             <div class="service-card">
                 <div class="service-card-content">
                     <div class="service-card-icon">${getIcon('check-circle')}</div>
@@ -228,9 +220,9 @@
         container.innerHTML = `
             <div class="container">
                 <div class="services-header">
-                    <div class="services-label">What's Included</div>
-                    <h2 class="services-title">${currentService.title} Services</h2>
-                    <p class="services-subtitle">Here's what you can expect when you book this service.</p>
+                    <div class="services-label">Why ${currentArea.name}</div>
+                    <h2 class="services-title">Serving ${currentArea.name} & Surrounding Areas</h2>
+                    <p class="services-subtitle">Here's what you can expect when you book with us.</p>
                 </div>
                 <div class="services-grid">${features}</div>
             </div>
@@ -363,22 +355,22 @@
     }
     
     // ==========================================
-    // INIT - Service page initialization
+    // INIT - Service area page initialization
     // ==========================================
-    function initServicePage() {
-        // Get current service from pathname
-        currentService = getServiceFromPathname();
+    function initServiceAreaPage() {
+        // Get current area from pathname
+        currentArea = getAreaFromPathname();
         
         // Set SEO
-        setServiceSEO(currentService);
+        setAreaSEO(currentArea);
         
         // Init common (promo banner, top bar, header, mobile menu)
-        initCommon('service');
+        initCommon('serviceArea');
         
         // Render page sections
         renderHero();
         renderQuoteForm();
-        renderWhatsIncluded();
+        renderAreaFeatures();
         renderProcess();
         renderWhyUs();
         renderReviews();
@@ -390,8 +382,8 @@
     
     // Auto-initialize when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initServicePage);
+        document.addEventListener('DOMContentLoaded', initServiceAreaPage);
     } else {
-        initServicePage();
+        initServiceAreaPage();
     }
 })();

@@ -164,6 +164,15 @@
                             <div class="quote-form-subtitle">${CONFIG.form.formSubtitle || 'No spam, no hassle — just honest pricing'}</div>
                         </div>
                         <form class="quote-form" id="hero-form">
+                            <!-- Universal tracking fields -->
+                            <input type="hidden" name="pageType" value="home">
+                            <input type="hidden" name="pageSlug" value="home">
+                            <input type="hidden" name="companySlug" value="${CONFIG.brand.companySlug}">
+                            <input type="hidden" name="utm_source" value="${new URLSearchParams(window.location.search).get('utm_source') || ''}">
+                            <input type="hidden" name="utm_medium" value="${new URLSearchParams(window.location.search).get('utm_medium') || ''}">
+                            <input type="hidden" name="utm_campaign" value="${new URLSearchParams(window.location.search).get('utm_campaign') || ''}">
+                            <input type="hidden" name="utm_content" value="${new URLSearchParams(window.location.search).get('utm_content') || ''}">
+                            <input type="hidden" name="utm_term" value="${new URLSearchParams(window.location.search).get('utm_term') || ''}">
                             <div class="form-row">
                                 ${CONFIG.form.fields.slice(0, 2).map(field => `
                                     <div class="form-group">

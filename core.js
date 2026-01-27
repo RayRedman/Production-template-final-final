@@ -400,6 +400,19 @@ function renderHeader() {
                 </div>
             </div>`;
         }
+        // Special handling for service areas dropdown - derived from CONFIG.serviceAreas[]
+        if (item.type === 'serviceAreasDropdown') {
+            const areaLinks = (CONFIG.serviceAreas || []).map(a => {
+                const slug = a.slug || a.id;
+                return `<a href="/service-areas/${slug}.html" class="nav-dropdown-link">${a.name}</a>`;
+            }).join('');
+            return `<div class="nav-dropdown">
+                <span class="nav-link nav-dropdown-toggle">${item.label}</span>
+                <div class="nav-dropdown-menu">
+                    ${areaLinks}
+                </div>
+            </div>`;
+        }
         // Standard dropdown with explicit children
         if (item.children) {
             return `<div class="nav-dropdown">
@@ -484,6 +497,22 @@ function renderMobileMenu() {
                 </button>
                 <div class="mobile-nav-children">
                     ${serviceLinks}
+                </div>
+            </div>`;
+        }
+        // Special handling for service areas dropdown - derived from CONFIG.serviceAreas[]
+        if (item.type === 'serviceAreasDropdown') {
+            const areaLinks = (CONFIG.serviceAreas || []).map(a => {
+                const slug = a.slug || a.id;
+                return `<a href="/service-areas/${slug}.html" class="mobile-nav-child">${a.name}</a>`;
+            }).join('');
+            return `<div class="mobile-nav-dropdown">
+                <button class="mobile-nav-link mobile-nav-toggle" type="button">
+                    ${item.label}
+                    ${chevronDown}
+                </button>
+                <div class="mobile-nav-children">
+                    ${areaLinks}
                 </div>
             </div>`;
         }
