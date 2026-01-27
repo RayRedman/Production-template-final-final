@@ -92,24 +92,24 @@ const CONFIG = {
     // ==========================================
     seo: {
         home: {
-            title: "Splashy Bubbles Mobile Auto Detailing | Hemet, CA",
-            description: "Professional mobile car detailing in Hemet, CA. We come to you! Interior, exterior, upholstery cleaning & Tesla detailing. 4.9★ on Google. Call (951) 708-6705",
+            title: "Reliable Handyman Pros | Austin, TX",
+            description: "Professional handyman services in Austin, TX. Repairs, installations, and small remodels. Licensed & insured. 4.9★ on Google. Call (512) 555-0147",
         },
         about: {
-            title: "About Us | Splashy Bubbles Mobile Auto Detailing",
-            description: "Hemet's trusted mobile auto detailing service. We bring professional detailing to your home or office.",
+            title: "About Us | Reliable Handyman Pros",
+            description: "Austin's trusted handyman service. We bring professional repairs and installations to your home or business.",
         },
         services: {
-            title: "Auto Detailing Services | Splashy Bubbles Hemet",
-            description: "Full interior & exterior detailing, upholstery cleaning, Tesla detailing, ceramic coating. Mobile service in Hemet and surrounding areas.",
+            title: "Handyman Services | Reliable Handyman Pros Austin",
+            description: "Drywall repair, TV mounting, door repairs, fixture installation, furniture assembly, and general home repairs in Austin and surrounding areas.",
         },
         contact: {
-            title: "Contact | Splashy Bubbles Mobile Auto Detailing",
-            description: "Book your mobile detail today. Call (951) 708-6705 or request a free quote online.",
+            title: "Contact | Reliable Handyman Pros",
+            description: "Book your handyman service today. Call (512) 555-0147 or request a free estimate online.",
         },
         serviceArea: {
-            title: "Service Areas | Splashy Bubbles Mobile Auto Detailing",
-            description: "Mobile auto detailing in Hemet, San Jacinto, Menifee, Temecula, Murrieta and surrounding areas.",
+            title: "Service Areas | Reliable Handyman Pros",
+            description: "Handyman services in Austin, Cedar Park, Round Rock, Georgetown, Leander, Pflugerville and surrounding areas.",
         },
     },
 
@@ -117,18 +117,19 @@ const CONFIG = {
     // IMAGES
     // ==========================================
     images: {
-        hero: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1600&q=80",
-        about: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80",
-        whyUs: "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&q=80",
-        contact: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&q=80",
+        basePath: "/assets/clients/active/",
+        hero: "/assets/clients/active/hero.jpg",
+        about: "/assets/clients/active/about.jpg",
+        whyUs: "/assets/clients/active/why-us.jpg",
+        contact: "/assets/clients/active/contact.jpg",
         
         services: {
-            "exterior-detail": "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&q=80",
-            "interior-detail": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
-            "full-detail": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80",
-            "upholstery": "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?w=800&q=80",
-            "tesla-detail": "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&q=80",
-            "ceramic-coating": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80",
+            "drywall": "/assets/clients/active/services/drywall.jpg",
+            "tv-mounting": "/assets/clients/active/services/tv-mount.jpg",
+            "doors-locks": "/assets/clients/active/services/door.jpg",
+            "fixtures": "/assets/clients/active/services/fixtures.jpg",
+            "assembly": "/assets/clients/active/services/assembly.jpg",
+            "general-repairs": "/assets/clients/active/services/repairs.jpg",
         },
         
         gallery: {
@@ -136,15 +137,15 @@ const CONFIG = {
             title: "Recent Work",
             subtitle: "Real projects completed for homeowners and businesses",
             items: [
-                { src: "/assets/clients/active/projects/01.jpg", alt: "Recent project 1" },
-                { src: "/assets/clients/active/projects/02.jpg", alt: "Recent project 2" },
-                { src: "/assets/clients/active/projects/03.jpg", alt: "Recent project 3" },
-                { src: "/assets/clients/active/projects/04.jpg", alt: "Recent project 4" },
-                { src: "/assets/clients/active/projects/05.jpg", alt: "Recent project 5" },
-                { src: "/assets/clients/active/projects/06.jpg", alt: "Recent project 6" }
+                { src: "/assets/clients/active/projects/01.jpg", alt: "Drywall repair project" },
+                { src: "/assets/clients/active/projects/02.jpg", alt: "TV mounting installation" },
+                { src: "/assets/clients/active/projects/03.jpg", alt: "Door repair" },
+                { src: "/assets/clients/active/projects/04.jpg", alt: "Light fixture installation" },
+                { src: "/assets/clients/active/projects/05.jpg", alt: "Furniture assembly" },
+                { src: "/assets/clients/active/projects/06.jpg", alt: "General home repairs" }
             ],
         },
-        fallback: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&q=80"
+        fallback: "/assets/clients/active/fallback.jpg"
     },
 
 
@@ -338,12 +339,13 @@ const CONFIG = {
     // PROCESS / HOW IT WORKS
     // ==========================================
     process: {
+        label: "How It Works",
         title: "Simple & Easy Process",
         steps: [
             {
                 number: "1",
                 title: "Request a Quote",
-                desc: "Fill out our quick form or give us a call to schedule your detail.",
+                desc: "Fill out our quick form or give us a call to schedule your service.",
             },
             {
                 number: "2", 
@@ -353,7 +355,7 @@ const CONFIG = {
             {
                 number: "3",
                 title: "Enjoy the Results",
-                desc: "Sit back and enjoy your freshly detailed, showroom-clean vehicle.",
+                desc: "Relax while we handle the repairs. Your home, handled.",
             },
         ],
     },
@@ -362,14 +364,14 @@ const CONFIG = {
     // WHY CHOOSE US
     // ==========================================
     whyUs: {
-        title: "Why Choose Splashy Bubbles",
-        subtitle: "We bring professional auto detailing directly to your location. No drop-offs, no waiting - we come to you.",
+        title: "Why Choose Reliable Handyman Pros",
+        subtitle: "We bring professional repairs and installations directly to your home. No hassle, just results.",
         image: null,
         items: [
             {
                 icon: "truck",
                 title: "We Come To You",
-                description: "Mobile service at your home, office, or anywhere in Hemet and surrounding areas.",
+                description: "Mobile service at your home, office, or anywhere in Austin and surrounding areas.",
             },
             {
                 icon: "star",
@@ -393,15 +395,16 @@ const CONFIG = {
     // OUR WORK / GALLERY
     // ==========================================
     ourWork: {
+        label: "Our Work",
         title: "Recent Projects",
-        subtitle: "See the quality and care we bring to every detail.",
+        subtitle: "See the quality and care we bring to every job.",
         images: [
-            { src: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&q=80", alt: "Exterior wash" },
-            { src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80", alt: "Porsche detail" },
-            { src: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=80", alt: "Corvette detail" },
-            { src: "https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&q=80", alt: "Interior clean" },
-            { src: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80", alt: "Classic car" },
-            { src: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&q=80", alt: "Sports car" },
+            { src: "/assets/clients/active/projects/01.jpg", alt: "Drywall repair project" },
+            { src: "/assets/clients/active/projects/02.jpg", alt: "TV mounting installation" },
+            { src: "/assets/clients/active/projects/03.jpg", alt: "Door repair" },
+            { src: "/assets/clients/active/projects/04.jpg", alt: "Light fixture installation" },
+            { src: "/assets/clients/active/projects/05.jpg", alt: "Furniture assembly" },
+            { src: "/assets/clients/active/projects/06.jpg", alt: "General home repairs" },
         ],
     },
 
@@ -455,8 +458,8 @@ const CONFIG = {
     // CTA SECTION
     // ==========================================
     cta: {
-        title: "Ready for a Showroom Shine?",
-        subtitle: "Book your mobile detail today and we'll come to you.",
+        title: "Ready to Get Started?",
+        subtitle: "Book your handyman service today and we'll come to you.",
         buttonText: "Get Free Quote",
         buttonLink: "contact.html",
         showPhone: true,
@@ -470,20 +473,20 @@ const CONFIG = {
         subtitle: "Got questions? We've got answers.",
         items: [
             {
-                question: "How does mobile detailing work?",
-                answer: "We come to your location with all the equipment and supplies needed. Just provide access to your vehicle and we handle everything. We bring our own water and power - you don't need to provide anything.",
+                question: "How do I request service?",
+                answer: "Fill out our quick online form or call us directly. We typically respond within 30 minutes during business hours.",
             },
             {
-                question: "How long does a detail take?",
-                answer: "An exterior detail typically takes 1-2 hours. Interior detail is 1-2 hours. A full detail package takes 3-4 hours depending on vehicle size and condition.",
+                question: "How long does a typical job take?",
+                answer: "Most small repairs take 1-2 hours. Larger projects like multiple repairs or installations may take half a day. We'll give you an estimate upfront.",
             },
             {
                 question: "What areas do you serve?",
-                answer: "We serve Hemet and surrounding areas including San Jacinto, Menifee, Temecula, Murrieta, Winchester, Sun City, and Perris. Contact us to confirm service in your area.",
+                answer: "We serve Austin and surrounding areas including Cedar Park, Round Rock, Georgetown, Leander, and Pflugerville. Contact us to confirm service in your area.",
             },
             {
                 question: "Do I need to be home during the service?",
-                answer: "Not necessarily. As long as we have access to your vehicle and a place to work, you can go about your day. Many customers have us detail their car while they're at work.",
+                answer: "We prefer you to be home for the initial walkthrough and final review, but we can work out arrangements if needed.",
             },
             {
                 question: "What forms of payment do you accept?",
@@ -496,7 +499,7 @@ const CONFIG = {
     // FOOTER
     // ==========================================
     footer: {
-        description: "Professional mobile auto detailing in Hemet, CA. We bring the shine to your driveway.",
+        description: "Professional handyman services in Austin, TX. We bring quality repairs to your doorstep.",
         copyrightYear: new Date().getFullYear(),
         quickLinksTitle: "Quick Links",
         quickLinks: [
@@ -519,30 +522,30 @@ const CONFIG = {
     // ABOUT PAGE
     // ==========================================
     about: {
-        title: "About Splashy Bubbles",
-        subtitle: "Mobile auto detailing in Hemet, CA",
+        title: "About Reliable Handyman Pros",
+        subtitle: "Professional handyman services in Austin, TX",
         story: {
             title: "Our Story",
             image: null,
             paragraphs: [
-                "Splashy Bubbles Mobile Auto Detailing was founded with a simple idea: professional car detailing shouldn't require you to give up your whole day.",
-                "We bring the full detailing experience directly to your driveway, office parking lot, or wherever is most convenient for you. Based in Hemet, California, we serve the entire region including San Jacinto, Menifee, Temecula, and Murrieta.",
-                "Our mobile setup means you get dealership-quality results without the hassle of dropping off your vehicle. With over 500 cars detailed and a 4.9-star rating on Google, we're proud to be Hemet's trusted choice for mobile auto detailing.",
+                "Reliable Handyman Pros was founded with a simple idea: getting small repairs and installations done shouldn't be a hassle.",
+                "We bring professional handyman services directly to your home or business. Based in Austin, Texas, we serve the entire region including Cedar Park, Round Rock, Georgetown, Leander, and Pflugerville.",
+                "Our focus on clear communication, fair pricing, and quality workmanship has earned us a 4.9-star rating on Google. We're proud to be Austin's trusted choice for repairs, installations, and small remodels.",
             ],
         },
         values: {
             title: "Why We're Different",
-            subtitle: "What sets Splashy Bubbles apart",
+            subtitle: "What sets Reliable Handyman Pros apart",
             items: [
                 {
                     icon: "truck",
                     title: "Convenience",
-                    description: "We come to you. No drop-offs, no waiting rooms, no picking up your car later.",
+                    description: "We come to you. Fast scheduling, clear communication, and reliable service.",
                 },
                 {
                     icon: "star",
                     title: "Quality",
-                    description: "Professional-grade products and techniques for showroom results every time.",
+                    description: "Professional tools and techniques for results that last.",
                 },
                 {
                     icon: "check",
@@ -564,15 +567,15 @@ const CONFIG = {
     // ==========================================
     contact: {
         title: "Contact Us",
-        subtitle: "Ready to get your car detailed? Get in touch!",
+        subtitle: "Ready to get your project started? Get in touch!",
         showMap: true,
-        mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106065.96877829656!2d-117.0237!3d33.7475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80db6b3f7f3b3b3b%3A0x3b3b3b3b3b3b3b3b!2sHemet%2C%20CA!5e0!3m2!1sen!2sus!4v1234567890",
+        mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220984.39868430544!2d-97.9383!3d30.2672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a0cc032f%3A0x5d9b464bd469d57a!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1234567890",
         infoTitle: "Get In Touch",
         infoSubtitle: "Have questions? We'd love to hear from you.",
         hoursTitle: "Business Hours",
         hours: [
-            { days: "Monday - Friday", time: "8:00 AM - 6:00 PM" },
-            { days: "Saturday", time: "8:00 AM - 5:00 PM" },
+            { days: "Monday - Friday", time: "7:00 AM - 7:00 PM" },
+            { days: "Saturday", time: "7:00 AM - 7:00 PM" },
             { days: "Sunday", time: "Closed" },
         ],
         emergencyNote: "Text or call anytime for scheduling",
@@ -582,8 +585,8 @@ const CONFIG = {
             { name: "name", type: "text", placeholder: "Your Name", required: true, halfWidth: true },
             { name: "phone", type: "tel", placeholder: "Phone Number", required: true, halfWidth: true },
             { name: "email", type: "email", placeholder: "Email Address", required: false, halfWidth: false },
-            { name: "vehicle", type: "text", placeholder: "Vehicle Year/Make/Model", required: false, halfWidth: false },
-            { name: "message", type: "textarea", placeholder: "What services are you interested in?", required: false, halfWidth: false, rows: 4 },
+            { name: "address", type: "text", placeholder: "Service Address", required: false, halfWidth: false },
+            { name: "message", type: "textarea", placeholder: "Describe the work you need done...", required: false, halfWidth: false, rows: 4 },
         ],
         formSubmitText: "Request Quote",
     },
@@ -593,31 +596,31 @@ const CONFIG = {
     // ==========================================
     serviceArea: {
         title: "Areas We Serve",
-        subtitle: "Mobile detailing throughout Hemet and surrounding areas",
-        description: "We provide mobile auto detailing services throughout the Hemet area and surrounding communities. If you don't see your area listed, give us a call—we may still be able to help!",
+        subtitle: "Handyman services throughout Austin and surrounding areas",
+        description: "We provide professional handyman services throughout the Austin area and surrounding communities. If you don't see your area listed, give us a call—we may still be able to help!",
         showMap: true,
-        mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212525.75857236!2d-117.1!3d33.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80db6b3f7f3b3b3b%3A0x3b3b3b3b3b3b3b3b!2sHemet%2C%20CA!5e0!3m2!1sen!2sus",
+        mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220984.39868430544!2d-97.9383!3d30.2672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a0cc032f%3A0x5d9b464bd469d57a!2sAustin%2C%20TX!5e0!3m2!1sen!2sus",
         primaryAreas: {
             title: "Primary Service Areas",
             subtitle: "Same-day service typically available",
             areas: [
-                "Hemet",
-                "San Jacinto",
-                "Menifee",
-                "Temecula",
-                "Murrieta",
+                "Austin",
+                "Cedar Park",
+                "Round Rock",
+                "Georgetown",
+                "Pflugerville",
             ],
         },
         secondaryAreas: {
             title: "Extended Service Areas",
             subtitle: "Service available with advance scheduling",
             areas: [
-                "Winchester",
-                "Sun City",
-                "Perris",
-                "Lake Elsinore",
-                "Canyon Lake",
-                "Wildomar",
+                "Leander",
+                "Lakeway",
+                "Bee Cave",
+                "Dripping Springs",
+                "Kyle",
+                "Buda",
             ],
         },
         ctaTitle: "Not Sure If We Service Your Area?",

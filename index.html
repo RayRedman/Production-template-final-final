@@ -259,11 +259,9 @@
         const container = document.getElementById('process');
         if (!container) return;
         
-        const steps = CONFIG.process?.steps || [
-            { number: "1", title: "Request a Quote", desc: "Fill out our quick form or give us a call to schedule your service." },
-            { number: "2", title: "We Come to You", desc: "Our team arrives at your location with all equipment ready." },
-            { number: "3", title: "Enjoy the Results", desc: "Sit back and enjoy your freshly detailed vehicle." }
-        ];
+        // Require CONFIG.process.steps - no hardcoded fallback
+        if (!CONFIG.process?.steps) return;
+        const steps = CONFIG.process.steps;
         
         const stepsHTML = steps.map((step, i) => `
             <div class="process-step">
@@ -334,14 +332,9 @@
         const container = document.getElementById('our-work');
         if (!container) return;
         
-        const images = CONFIG.ourWork?.images || [
-            { src: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&q=80", alt: "Detail work" },
-            { src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80", alt: "Interior detail" },
-            { src: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=80", alt: "Exterior detail" },
-            { src: "https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&q=80", alt: "Full detail" },
-            { src: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80", alt: "Clean vehicle" },
-            { src: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&q=80", alt: "Finished work" },
-        ];
+        // Require CONFIG.ourWork.images - no hardcoded fallback
+        if (!CONFIG.ourWork?.images) return;
+        const images = CONFIG.ourWork.images;
         
         const gallery = images.map(img => `
             <div class="work-item">
@@ -357,7 +350,7 @@
                 <div class="our-work-header">
                     <div class="our-work-label">${CONFIG.ourWork?.label || 'Our Work'}</div>
                     <h2 class="our-work-title">${CONFIG.ourWork?.title || 'Recent Projects'}</h2>
-                    <p class="our-work-subtitle">${CONFIG.ourWork?.subtitle || 'See the quality and care we bring to every detail.'}</p>
+                    <p class="our-work-subtitle">${CONFIG.ourWork?.subtitle || 'See the quality and care we bring to every job.'}</p>
                 </div>
                 <div class="work-grid">${gallery}</div>
             </div>
