@@ -3803,24 +3803,22 @@ section.compact {
     }
 }
 
-/* ===========================================
-   FINAL CLAMP: Our Work Overlay Centering Fix
-   Prevents icon from jumping to top-left on hover
-   =========================================== */
+/* === P0 FIX: Our Work overlay icon must stay centered on hover (no jump) === */
 .our-work .work-item-overlay {
-    position: absolute !important;
-    inset: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+  position: absolute;
+  inset: 0;
+  display: block; /* stop relying on flex centering */
 }
-
 .our-work .work-item-icon {
-    position: static !important;
-    transform: none !important;
-    line-height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .our-work .work-item-icon svg {
-    display: block;
+  display: block;
 }
