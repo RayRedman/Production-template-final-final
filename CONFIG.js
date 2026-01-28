@@ -209,6 +209,7 @@ const CONFIG = {
         messagePlaceholder: "Describe the work you need done (rooms, materials, photos, timing)...",
         consentText: "I agree to receive text messages and calls about my inquiry.",
         ghlWebhook: "https://services.leadconnectorhq.com/hooks/9PkCOSdzwRxdCM7u0n9A/webhook-trigger/679eb1bc-b34d-4f72-bad9-50157b5fbc8f",
+        successMessage: "Thanks — we got it. We'll text you shortly.",
         fields: [
             { name: "name", label: "Full Name", type: "text", placeholder: "John Smith", required: true },
             { name: "phone", label: "Phone Number", type: "tel", placeholder: "(512) 555-0147", required: true },
