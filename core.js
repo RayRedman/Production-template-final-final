@@ -745,8 +745,8 @@ function setupFormHandler(formId, webhookUrl, successMessage) {
             await fetch(webhookUrl, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(data).toString()
             });
             
             alert(successMessage || CONFIG.form.successMessage);
