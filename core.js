@@ -749,12 +749,22 @@ function setupFormHandler(formId, webhookUrl, successMessage) {
                 body: new URLSearchParams(data).toString()
             });
             
-            alert(successMessage || CONFIG.form.successMessage);
-            form.reset();
+            // Replace form with success message
+            const formWrapper = form.closest('.quote-form-wrapper') || form.parentElement;
+            const msg = successMessage || CONFIG.form.successMessage || "Thanks! We'll be in touch shortly.";
+            formWrapper.innerHTML = `
+                <div class="form-success">
+                    <div class="form-success-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 class="form-success-title">${msg}</h3>
+                    <p class="form-success-subtitle">${CONFIG.form.successSubtext || "We typically respond within 30 minutes during business hours."}</p>
+                    <a href="tel:${CONFIG.brand.phoneRaw}" class="btn btn-accent">${ICONS.phone} Call Now: ${CONFIG.brand.phone}</a>
+                </div>
+            `;
         } catch (err) {
             console.error('Form submission error:', err);
             alert(CONFIG.ui.error || 'Something went wrong. Please try again.');
-        } finally {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
         }
