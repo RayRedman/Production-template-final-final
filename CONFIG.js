@@ -783,7 +783,17 @@ const CONFIG = {
         emergencyService: "Mobile Service Available",
         freeEstimate: "Free Estimate",
         satisfactionGuarantee: "Satisfaction Guaranteed"
-    }
+    },
+
+    // ==========================================
+    // TRACKING / ANALYTICS
+    // Add your tracking IDs here per client
+    // ==========================================
+    tracking: {
+        gtm: "",          // Google Tag Manager: "GTM-XXXXXXX"
+        ga4: "",          // Google Analytics 4: "G-XXXXXXXXXX"
+        fbPixel: "",      // Facebook Pixel: "1234567890"
+    },
 };
 
 // Make CONFIG globally available

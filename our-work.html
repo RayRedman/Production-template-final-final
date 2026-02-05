@@ -108,22 +108,6 @@
         `;
     }
     
-    function renderStickyMobileCTA() {
-        const container = document.getElementById('sticky-mobile-cta');
-        if (!container) return;
-        
-        container.innerHTML = `
-            <div class="sticky-mobile-cta-inner">
-                <a href="tel:${CONFIG.brand.phoneRaw}" class="btn btn-call">
-                    ${ICONS.phone} ${CONFIG.ui?.callNowShort || 'Call Now'}
-                </a>
-                <a href="/index.html#quote" class="btn btn-quote">
-                    ${CONFIG.ui?.freeQuoteShort || 'Free Quote'}
-                </a>
-            </div>
-        `;
-    }
-    
     // ==========================================
     // INIT
     // ==========================================
