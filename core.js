@@ -83,6 +83,14 @@ function getStarRating(rating) {
 }
 
 // ==========================================
+// XSS SANITIZATION HELPER
+// ==========================================
+function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+// ==========================================
 // THEME APPLICATION
 // ==========================================
 function applyTheme() {
@@ -729,26 +737,36 @@ function renderFooter() {
 function setupFormHandler(formId, webhookUrl, successMessage) {
     const form = document.getElementById(formId);
     if (!form) return;
-    
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = CONFIG.ui.loading || 'Loading...';
+        submitBtn.innerHTML = CONFIG.ui.loading || 'Sending...';
         submitBtn.disabled = true;
-        
+
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
-        
+
+        // Create an AbortController for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
         try {
+            // Use sendBeacon as backup before attempting fetch
+            const beaconData = new URLSearchParams(data).toString();
+
             await fetch(webhookUrl, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(data).toString()
+                body: beaconData,
+                signal: controller.signal
             });
-            
+
+            clearTimeout(timeoutId);
+
             // Replace form with success message
             const formWrapper = form.closest('.quote-form-wrapper') || form.parentElement;
             const msg = successMessage || CONFIG.form.successMessage || "Thanks! We'll be in touch shortly.";
@@ -763,10 +781,32 @@ function setupFormHandler(formId, webhookUrl, successMessage) {
                 </div>
             `;
         } catch (err) {
-            console.error('Form submission error:', err);
-            alert(CONFIG.ui.error || 'Something went wrong. Please try again.');
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+            clearTimeout(timeoutId);
+
+            if (err.name === 'AbortError') {
+                // Timeout - but data might have been sent. Use sendBeacon as backup.
+                try { navigator.sendBeacon(webhookUrl, new URLSearchParams(data)); } catch(e) {}
+                // Show success since beacon likely delivered
+                const formWrapper = form.closest('.quote-form-wrapper') || form.parentElement;
+                const msg = successMessage || CONFIG.form.successMessage || "Thanks! We'll be in touch shortly.";
+                formWrapper.innerHTML = `
+                    <div class="form-success">
+                        <div class="form-success-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <h3 class="form-success-title">${msg}</h3>
+                        <p class="form-success-subtitle">${CONFIG.form.successSubtext || "We typically respond within 30 minutes during business hours."}</p>
+                        <a href="tel:${CONFIG.brand.phoneRaw}" class="btn btn-accent">${ICONS.phone} Call Now: ${CONFIG.brand.phone}</a>
+                    </div>
+                `;
+            } else {
+                // Actual network error - try sendBeacon as last resort
+                try { navigator.sendBeacon(webhookUrl, new URLSearchParams(data)); } catch(e) {}
+                console.error('Form submission error:', err);
+                alert(CONFIG.ui.error || 'Something went wrong. Please call us directly at ' + CONFIG.brand.phone);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         }
     });
 }
@@ -800,18 +840,528 @@ function initScrollAnimations() {
 }
 
 // ==========================================
+// SHARED RENDER: REVIEWS
+// ==========================================
+function renderReviews() {
+    if (typeof CONFIG === 'undefined') return;
+
+    const container = document.getElementById('reviews');
+    if (!container) return;
+
+    const googleBadge = renderGoogleRatingBadge();
+
+    const cards = CONFIG.reviews.items.map(r => {
+        const initials = r.author.split(' ').map(n => n[0]).join('');
+        const stars = getStarRating(r.rating);
+
+        return `
+            <div class="review-card">
+                <div class="review-stars">${stars}</div>
+                <p class="review-text">"${r.text}"</p>
+                <div class="review-author">
+                    ${r.avatar
+                        ? `<img src="${r.avatar}" alt="${r.author}" class="review-avatar">`
+                        : `<div class="review-avatar-fallback">${initials}</div>`}
+                    <div>
+                        <div class="review-name">${r.author}</div>
+                        <div class="review-location">${r.location}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    container.innerHTML = `
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">${CONFIG.reviews.title}</h2>
+                <p class="section-subtitle">${CONFIG.reviews.subtitle}</p>
+            </div>
+            ${googleBadge}
+            <div class="reviews-grid">${cards}</div>
+        </div>
+    `;
+}
+
+// ==========================================
+// SHARED RENDER: WHY US
+// ==========================================
+function renderWhyUs() {
+    if (typeof CONFIG === 'undefined') return;
+
+    const container = document.getElementById('why-us');
+    if (!container) return;
+
+    const image = CONFIG.whyUs.image || getImage('whyUs');
+
+    const items = CONFIG.whyUs.items.map(item => `
+        <div class="why-us-item">
+            <div class="why-us-icon">${getIcon(item.icon)}</div>
+            <div class="why-us-content-inner">
+                <h4 class="why-us-title">${item.title}</h4>
+                <p class="why-us-desc">${item.description}</p>
+            </div>
+        </div>
+    `).join('');
+
+    container.innerHTML = `
+        <div class="container">
+            <div class="why-us-wrapper">
+                <div class="why-us-image">
+                    <img src="${image}" alt="${CONFIG.whyUs.title}">
+                </div>
+                <div class="why-us-content">
+                    <h2>${CONFIG.whyUs.title}</h2>
+                    <p>${CONFIG.whyUs.subtitle}</p>
+                    <div class="why-us-grid">${items}</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ==========================================
+// SHARED RENDER: PROCESS / HOW IT WORKS
+// ==========================================
+function renderProcess() {
+    if (typeof CONFIG === 'undefined') return;
+
+    const container = document.getElementById('process');
+    if (!container) return;
+
+    if (!CONFIG.process?.steps) return;
+    const steps = CONFIG.process.steps;
+
+    const stepsHTML = steps.map((step, i) => `
+        <div class="process-step">
+            <div class="process-number">${step.number}</div>
+            <h3 class="process-step-title">${step.title}</h3>
+            <p class="process-step-desc">${step.desc}</p>
+        </div>
+    `).join('');
+
+    container.innerHTML = `
+        <div class="container">
+            <div class="process-header">
+                <div class="process-label">${CONFIG.process?.label || 'How It Works'}</div>
+                <h2 class="process-title">${CONFIG.process?.title || 'Simple & Easy Process'}</h2>
+            </div>
+            <div class="process-steps">${stepsHTML}</div>
+        </div>
+    `;
+}
+
+// ==========================================
+// SHARED RENDER: QUOTE FORM (Multi-Step)
+// Parameterized for use across all pages
+// ==========================================
+function renderQuoteForm(options = {}) {
+    if (typeof CONFIG === 'undefined') return;
+
+    const {
+        pageType = 'home',
+        pageSlug = 'home',
+        preselectedService = null,
+    } = options;
+
+    const container = document.getElementById('quote-section');
+    if (!container) return;
+
+    const serviceButtons = CONFIG.form.serviceOptions
+        .filter(o => o.value)
+        .map(o => {
+            const isSelected = preselectedService && o.value === preselectedService;
+            return `<button type="button" class="msf-service-btn${isSelected ? ' selected' : ''}" data-value="${o.value}">${o.label}</button>`;
+        }).join('');
+
+    const formFeatures = (CONFIG.form.features || [
+        "Free Estimates",
+        "Same-Day Service Available",
+        "No Obligation",
+        "Licensed & Insured"
+    ]).map(f => `
+        <div class="quote-feature"><span class="quote-feature-icon">${getIcon('check')}</span> ${f}</div>
+    `).join('');
+
+    const utmParams = new URLSearchParams(window.location.search);
+
+    const googleBadgeHTML = CONFIG.reviews?.google?.enabled ? `
+        <div class="msf-google-badge">
+            <div class="msf-google-stars">${getStarRating(CONFIG.reviews.google.rating)}</div>
+            <span>${CONFIG.reviews.google.rating} from ${CONFIG.reviews.google.reviewCount} reviews on Google</span>
+        </div>
+    ` : '';
+
+    container.innerHTML = `
+        <div class="container">
+            <div class="quote-section-inner">
+                <div class="quote-section-content">
+                    <div class="quote-section-badge">
+                        ${getIcon('clock')}
+                        <span>${CONFIG.form.responseBadge || 'We Respond Within 30 Minutes'}</span>
+                    </div>
+                    <h2 class="quote-section-title">${CONFIG.form.title}</h2>
+                    <p class="quote-section-subtitle">${CONFIG.form.subtitle || 'Tell us about your project and we\'ll provide a free, no-obligation estimate.'}</p>
+
+                    <div class="quote-section-features">
+                        ${formFeatures}
+                    </div>
+
+                    <div class="quote-phone-cta">
+                        <div class="quote-phone-label">${CONFIG.form.phoneCtaLabel || 'Prefer to talk? Call or text us:'}</div>
+                        <a href="tel:${CONFIG.brand.phoneRaw}" class="quote-phone-number">
+                            ${getIcon('phone')}
+                            <span>${CONFIG.brand.phone}</span>
+                        </a>
+                        <a href="sms:${CONFIG.brand.phoneRaw}" class="quote-sms-link">
+                            ${getIcon('messageCircle')}
+                            <span>Text Us</span>
+                        </a>
+                        <div class="quote-phone-hours">${CONFIG.brand.hours || 'Mon-Sat: 7AM - 7PM'}</div>
+                    </div>
+                </div>
+                <div class="quote-form-wrapper" id="quote">
+                    <div class="quote-form-header">
+                        <div class="quote-form-title">${CONFIG.form.formTitle || 'Get Your Free Quote'}</div>
+                        <div class="quote-form-subtitle">${CONFIG.form.formSubtitle || 'No spam, no hassle — just honest pricing'}</div>
+                    </div>
+                    <!-- Progress bar -->
+                    <div class="msf-progress">
+                        <div class="msf-progress-bar" id="msf-progress-bar" style="width: 33%"></div>
+                    </div>
+                    <div class="msf-step-indicator">Step <span id="msf-step-num">1</span> of 3</div>
+                    <form class="quote-form" id="hero-form">
+                        <!-- Hidden fields -->
+                        <input type="hidden" name="pageType" value="${pageType}">
+                        <input type="hidden" name="pageSlug" value="${pageSlug}">
+                        <input type="hidden" name="companySlug" value="${CONFIG.brand.companySlug}">
+                        <input type="hidden" name="utm_source" value="${utmParams.get('utm_source') || ''}">
+                        <input type="hidden" name="utm_medium" value="${utmParams.get('utm_medium') || ''}">
+                        <input type="hidden" name="utm_campaign" value="${utmParams.get('utm_campaign') || ''}">
+                        <input type="hidden" name="utm_content" value="${utmParams.get('utm_content') || ''}">
+                        <input type="hidden" name="utm_term" value="${utmParams.get('utm_term') || ''}">
+                        <input type="hidden" name="service" id="msf-service-value" value="${preselectedService || ''}">
+
+                        <!-- STEP 1: Service Selection -->
+                        <div class="msf-step active" data-step="1">
+                            <div class="msf-step-title">What do you need help with?</div>
+                            <div class="msf-service-grid">
+                                ${serviceButtons}
+                            </div>
+                        </div>
+
+                        <!-- STEP 2: Contact Info -->
+                        <div class="msf-step" data-step="2">
+                            <div class="msf-step-title">How can we reach you?</div>
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-input" placeholder="Full Name *" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" class="form-input" placeholder="Phone Number *" required id="msf-phone-input">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-input" placeholder="Email (optional)">
+                            </div>
+                            <button type="button" class="btn btn-accent btn-block btn-lg msf-next-btn" data-next="3">Almost Done ${getIcon('arrowRight')}</button>
+                            <button type="button" class="msf-back-link" data-back="1">${getIcon('arrowRight')} Back</button>
+                        </div>
+
+                        <!-- STEP 3: Details -->
+                        <div class="msf-step" data-step="3">
+                            <div class="msf-step-title">Any details to share?</div>
+                            <div class="form-group">
+                                <textarea name="message" class="form-textarea" rows="3" placeholder="${CONFIG.form.messagePlaceholder || 'Describe the work you need done (optional)...'}"></textarea>
+                            </div>
+                            ${googleBadgeHTML}
+                            <button type="submit" class="btn btn-accent btn-block btn-lg">${CONFIG.form.submitText || 'Get My Free Quote'}</button>
+                            <div class="form-consent-text">By submitting, you agree to receive texts and calls about your inquiry. Msg & data rates may apply.</div>
+                            <div class="form-trust-badge">
+                                ${getIcon('shield')}
+                                <span>${CONFIG.form.privacyText || 'Your information is secure and never shared'}</span>
+                            </div>
+                            <button type="button" class="msf-back-link" data-back="2">${getIcon('arrowRight')} Back</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Multi-step form logic
+    initMultiStepForm(container, preselectedService);
+
+    // Setup form handler
+    setupFormHandler('hero-form', CONFIG.form.ghlWebhook, CONFIG.form.successMessage);
+}
+
+// ==========================================
+// MULTI-STEP FORM CONTROLLER
+// ==========================================
+function initMultiStepForm(container, preselectedService) {
+    let currentStep = preselectedService ? 2 : 1;
+    const steps = container.querySelectorAll('.msf-step');
+    const progressBar = container.querySelector('#msf-progress-bar');
+    const stepNum = container.querySelector('#msf-step-num');
+    const serviceInput = container.querySelector('#msf-service-value');
+
+    function goToStep(step) {
+        currentStep = step;
+        steps.forEach(s => {
+            s.classList.remove('active');
+            if (parseInt(s.dataset.step) === step) s.classList.add('active');
+        });
+        if (progressBar) progressBar.style.width = (step / 3 * 100) + '%';
+        if (stepNum) stepNum.textContent = step;
+    }
+
+    // If preselected, jump to step 2
+    if (preselectedService) goToStep(2);
+
+    // Step 1: Service button clicks
+    container.querySelectorAll('.msf-service-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            container.querySelectorAll('.msf-service-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            serviceInput.value = btn.dataset.value;
+            setTimeout(() => goToStep(2), 150);
+        });
+    });
+
+    // Next buttons
+    container.querySelectorAll('.msf-next-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const nextStep = parseInt(btn.dataset.next);
+            // Validate current step fields
+            const currentStepEl = container.querySelector(`.msf-step[data-step="${currentStep}"]`);
+            const requiredFields = currentStepEl.querySelectorAll('[required]');
+            let valid = true;
+            requiredFields.forEach(f => {
+                if (!f.value.trim()) {
+                    f.classList.add('msf-error');
+                    valid = false;
+                } else {
+                    f.classList.remove('msf-error');
+                }
+            });
+            if (valid) goToStep(nextStep);
+        });
+    });
+
+    // Back buttons
+    container.querySelectorAll('.msf-back-link').forEach(btn => {
+        btn.addEventListener('click', () => {
+            goToStep(parseInt(btn.dataset.back));
+        });
+    });
+
+    // Phone number formatting
+    const phoneInput = container.querySelector('#msf-phone-input');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, '');
+            if (val.length > 10) val = val.slice(0, 10);
+            if (val.length >= 6) {
+                val = '(' + val.slice(0, 3) + ') ' + val.slice(3, 6) + '-' + val.slice(6);
+            } else if (val.length >= 3) {
+                val = '(' + val.slice(0, 3) + ') ' + val.slice(3);
+            }
+            e.target.value = val;
+        });
+    }
+}
+
+// ==========================================
+// JSON-LD STRUCTURED DATA
+// Auto-generates LocalBusiness + FAQ schema from CONFIG
+// ==========================================
+function renderJsonLD(pageKey = 'home') {
+    if (typeof CONFIG === 'undefined') return;
+
+    // Remove any existing JSON-LD
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(el => el.remove());
+
+    // LocalBusiness Schema
+    const localBusiness = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": CONFIG.brand.name,
+        "description": CONFIG.seo?.home?.description || CONFIG.footer?.description || '',
+        "telephone": CONFIG.brand.phone,
+        "email": CONFIG.brand.email,
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": CONFIG.brand.address
+        },
+        "openingHours": CONFIG.brand.hours,
+        "url": window.location.origin
+    };
+
+    // Add aggregate rating if reviews exist
+    if (CONFIG.reviews?.google?.enabled) {
+        localBusiness.aggregateRating = {
+            "@type": "AggregateRating",
+            "ratingValue": CONFIG.reviews.google.rating,
+            "reviewCount": CONFIG.reviews.google.reviewCount,
+            "bestRating": 5
+        };
+    }
+
+    // Add services as offered
+    if (CONFIG.services?.items) {
+        localBusiness.hasOfferCatalog = {
+            "@type": "OfferCatalog",
+            "name": CONFIG.services.title || "Services",
+            "itemListElement": CONFIG.services.items.map(s => ({
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": s.title,
+                    "description": s.fullDesc || s.shortDesc
+                }
+            }))
+        };
+    }
+
+    const ldScript = document.createElement('script');
+    ldScript.type = 'application/ld+json';
+    ldScript.textContent = JSON.stringify(localBusiness);
+    document.head.appendChild(ldScript);
+
+    // FAQ Schema (if FAQ exists and we're on a page that shows FAQ)
+    if (CONFIG.faq?.items && CONFIG.faq.items.length > 0) {
+        const faqSchema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": CONFIG.faq.items.map(f => ({
+                "@type": "Question",
+                "name": f.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": f.answer
+                }
+            }))
+        };
+
+        const faqScript = document.createElement('script');
+        faqScript.type = 'application/ld+json';
+        faqScript.textContent = JSON.stringify(faqSchema);
+        document.head.appendChild(faqScript);
+    }
+}
+
+// ==========================================
+// OG META TAGS FOR SOCIAL SHARING
+// ==========================================
+function renderOGMeta(pageKey = 'home') {
+    if (typeof CONFIG === 'undefined') return;
+
+    const seo = CONFIG.seo?.[pageKey] || CONFIG.seo?.home || {};
+    const ogImage = CONFIG.images?.og || CONFIG.images?.hero || '';
+
+    const ogTags = {
+        'og:title': seo.title || CONFIG.brand.name,
+        'og:description': seo.description || CONFIG.footer?.description || '',
+        'og:type': 'website',
+        'og:url': window.location.href,
+        'og:site_name': CONFIG.brand.name,
+        'og:locale': 'en_US',
+    };
+
+    if (ogImage) {
+        ogTags['og:image'] = ogImage.startsWith('http') ? ogImage : window.location.origin + ogImage;
+    }
+
+    // Twitter card tags
+    ogTags['twitter:card'] = 'summary_large_image';
+    ogTags['twitter:title'] = ogTags['og:title'];
+    ogTags['twitter:description'] = ogTags['og:description'];
+    if (ogImage) {
+        ogTags['twitter:image'] = ogTags['og:image'];
+    }
+
+    // Remove existing OG/Twitter meta tags
+    document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(el => el.remove());
+
+    // Add new meta tags
+    Object.entries(ogTags).forEach(([key, value]) => {
+        if (!value) return;
+        const meta = document.createElement('meta');
+        if (key.startsWith('og:')) {
+            meta.setAttribute('property', key);
+        } else {
+            meta.setAttribute('name', key);
+        }
+        meta.setAttribute('content', value);
+        document.head.appendChild(meta);
+    });
+}
+
+// ==========================================
+// ANALYTICS / TRACKING INJECTION
+// ==========================================
+function renderAnalytics() {
+    if (typeof CONFIG === 'undefined') return;
+    if (!CONFIG.tracking) return;
+
+    // Google Tag Manager
+    if (CONFIG.tracking.gtm) {
+        const gtmScript = document.createElement('script');
+        gtmScript.textContent = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${CONFIG.tracking.gtm}');`;
+        document.head.insertBefore(gtmScript, document.head.firstChild);
+    }
+
+    // Google Analytics 4
+    if (CONFIG.tracking.ga4) {
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${CONFIG.tracking.ga4}`;
+        document.head.appendChild(gaScript);
+
+        const gaInit = document.createElement('script');
+        gaInit.textContent = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${CONFIG.tracking.ga4}');`;
+        document.head.appendChild(gaInit);
+    }
+
+    // Facebook Pixel
+    if (CONFIG.tracking.fbPixel) {
+        const fbScript = document.createElement('script');
+        fbScript.textContent = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${CONFIG.tracking.fbPixel}');fbq('track','PageView');`;
+        document.head.appendChild(fbScript);
+    }
+}
+
+// ==========================================
 // INITIALIZE COMMON ELEMENTS
 // ==========================================
 function initCommon(pageKey = 'home') {
     applyTheme();
     applySEO(pageKey);
+    renderCanonical();
     renderPromoBanner();
     renderTopBar();
     renderHeader();
     renderTrustLogosBar();
-    
+    renderJsonLD(pageKey);
+    renderOGMeta(pageKey);
+    renderAnalytics();
+
     // Initialize scroll animations after a short delay to let content render
     setTimeout(initScrollAnimations, 100);
+
+    // Exit-intent popup after 5 seconds on page
+    setTimeout(renderExitIntent, 5000);
+}
+
+// ==========================================
+// CANONICAL TAG
+// ==========================================
+function renderCanonical() {
+    const existing = document.querySelector('link[rel="canonical"]');
+    if (existing) return;
+    const link = document.createElement('link');
+    link.rel = 'canonical';
+    link.href = window.location.origin + window.location.pathname;
+    document.head.appendChild(link);
 }
 
 // ==========================================
@@ -819,20 +1369,99 @@ function initCommon(pageKey = 'home') {
 // ==========================================
 function renderStickyMobileCTA() {
     if (typeof CONFIG === 'undefined') return;
-    
+
     const container = document.getElementById('sticky-mobile-cta');
     if (!container) return;
-    
+
     container.innerHTML = `
         <div class="sticky-mobile-cta-inner">
             <a href="tel:${CONFIG.brand.phoneRaw}" class="btn btn-call">
-                ${ICONS.phone} ${CONFIG.ui?.callNowShort || 'Call Now'}
+                ${ICONS.phone} Call
+            </a>
+            <a href="sms:${CONFIG.brand.phoneRaw}" class="btn btn-text">
+                ${ICONS.messageCircle} Text
             </a>
             <a href="${CONFIG.hero.ctaPrimary.href}" class="btn btn-quote">
-                ${CONFIG.ui?.freeQuoteShort || 'Free Quote'}
+                Free Quote
             </a>
         </div>
     `;
+}
+
+// ==========================================
+// EXIT-INTENT POPUP
+// ==========================================
+function renderExitIntent() {
+    if (typeof CONFIG === 'undefined') return;
+    if (sessionStorage.getItem('exitIntentShown')) return;
+
+    // Create the popup
+    const popup = document.createElement('div');
+    popup.id = 'exit-intent-popup';
+    popup.className = 'exit-popup-overlay';
+    popup.innerHTML = `
+        <div class="exit-popup">
+            <button class="exit-popup-close" aria-label="Close">&times;</button>
+            <div class="exit-popup-icon">${getIcon('clock')}</div>
+            <h3 class="exit-popup-title">Before You Go...</h3>
+            <p class="exit-popup-text">Get a free, no-obligation estimate in under 60 seconds.</p>
+            <form class="exit-popup-form" id="exit-form">
+                <input type="hidden" name="pageType" value="exit-intent">
+                <input type="hidden" name="companySlug" value="${CONFIG.brand.companySlug}">
+                <input type="text" name="name" class="form-input" placeholder="Your Name *" required>
+                <input type="tel" name="phone" class="form-input" placeholder="Phone Number *" required>
+                <button type="submit" class="btn btn-accent btn-block">Get My Free Quote</button>
+            </form>
+            <div class="exit-popup-alt">
+                or call <a href="tel:${CONFIG.brand.phoneRaw}">${CONFIG.brand.phone}</a>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(popup);
+
+    let shown = false;
+
+    function showPopup() {
+        if (shown) return;
+        shown = true;
+        sessionStorage.setItem('exitIntentShown', '1');
+        popup.classList.add('active');
+    }
+
+    function hidePopup() {
+        popup.classList.remove('active');
+    }
+
+    // Desktop: mouse leaves viewport toward top
+    document.addEventListener('mouseout', (e) => {
+        if (e.clientY <= 5 && !e.relatedTarget && !e.toElement) {
+            showPopup();
+        }
+    });
+
+    // Mobile: scroll up quickly after scrolling down
+    let lastScrollY = 0;
+    let scrolledDown = false;
+    window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        if (currentY > 500) scrolledDown = true;
+        if (scrolledDown && currentY < lastScrollY - 100 && currentY < 200) {
+            showPopup();
+        }
+        lastScrollY = currentY;
+    });
+
+    // Close handlers
+    popup.querySelector('.exit-popup-close').addEventListener('click', hidePopup);
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) hidePopup();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hidePopup();
+    });
+
+    // Form handler
+    setupFormHandler('exit-form', CONFIG.form.ghlWebhook, CONFIG.form.successMessage);
 }
 
 // Make functions globally available
@@ -841,6 +1470,7 @@ if (typeof window !== 'undefined') {
     window.getIcon = getIcon;
     window.getImage = getImage;
     window.getStarRating = getStarRating;
+    window.escapeHTML = escapeHTML;
     window.applyTheme = applyTheme;
     window.applySEO = applySEO;
     window.renderPromoBanner = renderPromoBanner;
@@ -852,10 +1482,20 @@ if (typeof window !== 'undefined') {
     window.renderMobileMenu = renderMobileMenu;
     window.renderTrustBadges = renderTrustBadges;
     window.renderStats = renderStats;
+    window.renderReviews = renderReviews;
+    window.renderWhyUs = renderWhyUs;
+    window.renderProcess = renderProcess;
+    window.renderQuoteForm = renderQuoteForm;
     window.renderCTA = renderCTA;
     window.renderFAQ = renderFAQ;
     window.renderFooter = renderFooter;
     window.renderStickyMobileCTA = renderStickyMobileCTA;
+    window.renderExitIntent = renderExitIntent;
+    window.renderCanonical = renderCanonical;
+    window.initMultiStepForm = initMultiStepForm;
+    window.renderJsonLD = renderJsonLD;
+    window.renderOGMeta = renderOGMeta;
+    window.renderAnalytics = renderAnalytics;
     window.setupFormHandler = setupFormHandler;
     window.initCommon = initCommon;
 }

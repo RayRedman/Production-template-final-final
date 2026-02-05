@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
+  <url><loc>/index.html</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>/contact.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/our-work.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+
+  <!-- Service Pages -->
+  <url><loc>/services/drywall.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/services/tv-mounting.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/services/doors-locks.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/services/fixtures.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/services/assembly.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/services/general-repairs.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+
+  <!-- Service Area Pages -->
+  <url><loc>/service-areas/austin.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/service-areas/cedar-park.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/service-areas/round-rock.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/service-areas/georgetown.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/service-areas/leander.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/service-areas/pflugerville.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+
+  <!-- Legal -->
+  <url><loc>/privacy-policy.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+  <url><loc>/terms.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+</urlset>
