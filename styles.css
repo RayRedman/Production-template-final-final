@@ -38,12 +38,12 @@
     --container-padding: 24px;
     
     /* Section Spacing */
-    --section-padding: 96px;
-    --section-padding-compact: 64px;
-    --section-gap: 48px;
-    
+    --section-padding: 64px;
+    --section-padding-compact: 48px;
+    --section-gap: 36px;
+
     /* Card System */
-    --card-radius: 14px;
+    --card-radius: 8px;
     --card-border: 1px solid var(--border-light);
     --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     --card-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.14);
@@ -53,7 +53,7 @@
     --btn-height: 52px;
     --btn-height-sm: 46px;
     --btn-height-lg: 56px;
-    --btn-radius: 10px;
+    --btn-radius: 4px;
     --btn-font-size: 0.95rem;
     --btn-font-size-sm: 0.9rem;
     --btn-font-size-lg: 1rem;
@@ -94,15 +94,15 @@
     --space-lg: 24px;
     --space-xl: 32px;
     --space-2xl: 48px;
-    --space-3xl: 80px;
-    --space-4xl: 100px;
-    --space-5xl: 120px;
+    --space-3xl: 56px;
+    --space-4xl: 72px;
+    --space-5xl: 96px;
     
     /* Border radius */
     --radius-sm: 4px;
     --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
+    --radius-lg: 6px;
+    --radius-xl: 8px;
     --radius-full: 9999px;
     
     /* Transitions */
@@ -124,7 +124,7 @@ html {
 body {
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: var(--text-dark);
-    line-height: 1.7;
+    line-height: 1.6;
     background: var(--bg-cream);
     font-size: 16px;
     font-weight: 400;
@@ -138,23 +138,23 @@ svg {
     flex-shrink: 0;
 }
 
-/* Headings - NO all-caps except H1 */
+/* Headings - Bold sans-serif, uppercase for authority */
 h1 {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;
-    line-height: 1.08;
+    line-height: 1.1;
     color: var(--primary);
-    text-transform: none;
-    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
 }
 
 h2, h3, h4, h5, h6 {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;
     line-height: 1.15;
     color: var(--primary);
-    text-transform: none;
-    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
 }
 
 a {
@@ -339,7 +339,7 @@ section.compact {
 }
 
 .trust-logo-rating {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 700;
     font-size: 1rem;
     color: var(--accent);
@@ -394,7 +394,7 @@ section.compact {
 }
 
 .google-rating-number {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 2rem;
     font-weight: 700;
     color: var(--text-dark);
@@ -457,10 +457,10 @@ section.compact {
 }
 
 .top-bar-logo-icon {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     background: var(--accent);
-    border-radius: 10px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -473,11 +473,11 @@ section.compact {
 }
 
 .top-bar-logo-text {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.4rem;
     font-weight: 700;
-    text-transform: none;
-    letter-spacing: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Right side of top bar */
@@ -558,10 +558,10 @@ section.compact {
 }
 
 .top-bar-phone-number {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.35rem;
     font-weight: 700;
-    letter-spacing: 0;
+    letter-spacing: 0.5px;
 }
 
 .top-bar-cta.btn {
@@ -614,10 +614,10 @@ section.compact {
 .nav-link {
     padding: 20px 20px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255,255,255,0.9);
-    text-transform: none;
-    letter-spacing: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     position: relative;
     transition: all var(--transition-base);
 }
@@ -640,9 +640,9 @@ section.compact {
     color: rgba(255,255,255,0.9);
     padding: 20px 20px;
     font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: none;
-    letter-spacing: 0;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .nav-dropdown-toggle::after {
@@ -671,7 +671,7 @@ section.compact {
     transform: translateX(-50%) translateY(10px);
     min-width: 220px;
     background: white;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
     opacity: 0;
     visibility: hidden;
     transition: all var(--transition-base);
@@ -789,8 +789,8 @@ section.compact {
     font-weight: 700;
     font-size: var(--btn-font-size);
     line-height: 1;
-    text-transform: none;
-    letter-spacing: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     white-space: nowrap;
     cursor: pointer;
     transition: all var(--transition-base);
@@ -959,12 +959,12 @@ section.compact {
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md) 0;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--text-dark);
     border-bottom: 1px solid var(--border);
-    text-transform: none;
-    letter-spacing: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     width: 100%;
     background: none;
     border-left: none;
@@ -1103,30 +1103,30 @@ section.compact {
 }
 
 .hero-headline {
-    font-family: 'Lora', Georgia, serif;
-    font-size: clamp(2.4rem, 6vw, 3.8rem);
-    line-height: 1.05;
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+    line-height: 1.1;
     margin-bottom: var(--space-md);
     color: white;
     font-weight: 700;
-    text-transform: none;
-    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 .hero-headline-accent {
     color: var(--accent);
     display: block;
-    letter-spacing: -1px;
+    letter-spacing: 0.02em;
 }
 
 .hero-subhead {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     color: white;
     opacity: 0.9;
     margin: 0 auto var(--space-lg);
-    max-width: 550px;
+    max-width: 520px;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.5;
 }
 
 /* Hero trust badges row */
@@ -1224,10 +1224,10 @@ section.compact {
 .hero-trust-strip-item {
     color: white;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    text-transform: none;
-    letter-spacing: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     white-space: nowrap;
 }
 
@@ -1299,7 +1299,8 @@ section.compact {
     font-size: clamp(1.4rem, 3vw, 1.75rem);
     color: var(--primary);
     margin-bottom: var(--space-sm);
-    text-transform: none;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
     line-height: 1.2;
 }
 
@@ -1364,7 +1365,7 @@ section.compact {
 .quote-phone-cta {
     background: var(--primary);
     padding: var(--space-lg);
-    border-radius: 10px;
+    border-radius: 4px;
     margin-top: var(--space-md);
 }
 
@@ -1386,8 +1387,8 @@ section.compact {
     justify-content: flex-start;
     gap: var(--space-sm);
     color: var(--accent);
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.4rem;
     font-weight: 700;
     text-decoration: none;
     transition: color var(--transition-base);
@@ -1433,11 +1434,12 @@ section.compact {
 }
 
 .quote-form-title {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.4rem;
     font-weight: 700;
     color: white;
-    text-transform: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: var(--space-xs);
 }
 
@@ -1591,12 +1593,12 @@ section.compact {
 }
 
 .hero-form-title {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5rem;
     font-weight: 700;
     color: white;
-    text-transform: none;
-    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .hero-form-subtitle {
@@ -1796,8 +1798,8 @@ section.compact {
     position: relative;
     padding-bottom: 0;
     line-height: 1.15;
-    letter-spacing: -0.01em;
-    text-transform: none;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
 }
 
 .section-title::after {
@@ -1805,11 +1807,11 @@ section.compact {
 }
 
 .section-subtitle {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--text-medium);
     max-width: 550px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 /* ==========================================
@@ -1912,19 +1914,19 @@ section.compact {
 }
 
 .service-card-title {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: var(--h3-size);
     font-weight: 700;
     color: var(--primary);
     margin-bottom: var(--h3-margin-bottom);
-    text-transform: none;
-    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 .service-card-desc {
     color: var(--text-medium);
-    line-height: 1.7;
-    font-size: 1rem;
+    line-height: 1.5;
+    font-size: 0.95rem;
     margin-bottom: var(--space-md);
 }
 
@@ -2026,20 +2028,20 @@ section.compact {
 }
 
 .process-number {
-    width: 70px;
-    height: 70px;
+    width: 64px;
+    height: 64px;
     background: var(--accent);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Lora', Georgia, serif;
-    font-size: 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2rem;
     font-weight: 700;
     color: white;
-    margin: 0 auto var(--space-lg);
+    margin: 0 auto var(--space-md);
     position: relative;
-    box-shadow: 0 4px 20px rgba(199, 91, 45, 0.2);
+    box-shadow: none;
 }
 
 .process-step-title {
@@ -2051,8 +2053,8 @@ section.compact {
 
 .process-step-desc {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     max-width: 280px;
     margin: 0 auto;
 }
@@ -2196,10 +2198,10 @@ section.compact {
 }
 
 .why-us-icon {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     background: var(--primary);
-    border-radius: 12px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2217,13 +2219,13 @@ section.compact {
 }
 
 .why-us-title {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--primary);
     margin-bottom: var(--h3-margin-bottom);
-    text-transform: none;
-    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 .why-us-item:hover .why-us-title {
@@ -2232,8 +2234,8 @@ section.compact {
 
 .why-us-desc {
     color: var(--text-medium);
-    line-height: 1.7;
-    font-size: 1rem;
+    line-height: 1.5;
+    font-size: 0.95rem;
 }
 
 /* ==========================================
@@ -2269,13 +2271,13 @@ section.compact {
 }
 
 .stat-value {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     color: var(--accent);
     line-height: 1;
     margin-bottom: var(--space-sm);
-    text-shadow: 0 2px 10px rgba(199, 91, 45, 0.3);
+    text-shadow: none;
 }
 
 .stat-label {
@@ -2498,9 +2500,10 @@ section.compact {
 .review-text {
     font-family: 'Lora', Georgia, serif;
     color: var(--text-medium);
-    line-height: 1.8;
+    line-height: 1.7;
     margin-bottom: var(--space-lg);
     font-style: italic;
+    font-size: 0.95rem;
     position: relative;
     z-index: 1;
 }
@@ -2557,12 +2560,12 @@ section.compact {
 }
 
 .cta-title {
-    font-family: 'Lora', Georgia, serif;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 700;
     color: var(--primary);
-    text-transform: none;
-    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
     margin-bottom: var(--space-md);
 }
 
@@ -2647,11 +2650,11 @@ section.compact {
     border: none;
     cursor: pointer;
     text-align: left;
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.15rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
     font-weight: 700;
     text-transform: none;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
     color: var(--primary);
 }
 
@@ -2720,9 +2723,11 @@ section.compact {
     flex: 1;
     text-align: center;
     padding: 12px 10px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
 }
 
 .sticky-mobile-cta .btn-call {
@@ -2779,12 +2784,12 @@ section.compact {
 }
 
 .footer-brand-name {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.3rem;
     font-weight: 700;
-    text-transform: none;
+    text-transform: uppercase;
     margin-bottom: var(--space-md);
-    letter-spacing: 0;
+    letter-spacing: 1px;
 }
 
 .footer-brand-desc {
@@ -4015,10 +4020,12 @@ section.compact {
 }
 
 .msf-step-title {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: var(--space-md);
     text-align: center;
 }
@@ -4247,10 +4254,12 @@ section.compact {
 }
 
 .exit-popup-title {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: 0.5rem;
 }
 
